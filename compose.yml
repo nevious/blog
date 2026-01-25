@@ -1,0 +1,10 @@
+services:
+  blog:
+    image: myvueblog
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+    volumes:
+      - ./src/:/src
+    ports:
+      - 5173:5173

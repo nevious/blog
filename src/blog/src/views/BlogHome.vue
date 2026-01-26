@@ -3,26 +3,25 @@
 		<h1>My blog</h1>
 		<ul class="post-list">
 			<li v-for="post in posts" :key="post.slug">
-				<router-link :to="{ name: 'post', params: {slug: post.slug } }">
-					{{ post.slug }}
-				</router-link>
-				<p class="date">{{ post.date }}</p>
+				<router-link :to="`/posts/${post.slug}`">{{ post.title }}</router-link>
 			</li>
 		</ul>
 	</div>
 </template>
 
-<script>
-	import { mapState } from 'vuex'
+<script setup>
+	import { onMounted, computed } from 'vue'
+	import { useStore } from 'vuex'
 
-	export default {
-		computed: {
-			...mapState(['posts'])
-		},
-		created() {
-			this.$store.dispatch('fetchPost')
-		}
-	}
+	// Access the store
+	const store = useStore()
+
+	// Fetch all posts on mount
+	onMounted(() => {
+	  store.dispatch('fetchPosts')
+	})
+
+	const posts = computed(() => store.state.posts)
 </script>
 
 <style>

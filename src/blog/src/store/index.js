@@ -20,15 +20,17 @@ export default createStore({
 		actions: {
 			// This is where we'd implement our backend logic
 			// for now we just use a list of dummy posts
-			fetchPost({ commit }) {
+			fetchPosts({ commit }) {
 				const posts = [
 					{
 						slug: 'hello-world',
+						date: '2026-01-25',
 						title: 'Hello World',
 						content: 'This is my first blog post on a [vue based project](https://vuejs.org/)'
 					},
 					{
 						slug: 'long-world',
+						date: '2026-01-25',
 						title: 'Long World',
 						content: `# 'Tis a long world!
 
@@ -37,6 +39,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vel nisi sit amet 
 Curabitur sit amet egestas odio. Mauris velit augue, ullamcorper non urna eu, imperdiet elementum ante. Donec et nisi fermentum, feugiat ligula eu, blandit risus. Pellentesque ex arcu, placerat in lacus eu, tempus bibendum enim. Proin sollicitudin ut odio ac consequat. Cras laoreet eu tortor a posuere. Curabitur a quam vel nulla pulvinar accumsan ut nec leo. Quisque ultrices nunc ligula, in gravida ante feugiat ut. Sed varius tincidunt ligula, sed imperdiet purus ullamcorper eget. Nulla eu orci tellus. Suspendisse ac tincidunt est. Morbi non euismod diam. Donec maximus semper augue. Quisque vestibulum orci ac nibh lacinia laoreet. Mauris id faucibus lorem.
 
 \`\`\`python
+class Test:
+	def __init__():
+		pass
+
 if __name__ == '__main__':
 	return main()
 \`\`\`
@@ -45,9 +51,9 @@ if __name__ == '__main__':
 				]
 				commit('SET_POSTS', posts)
 			},
-			fetchPostBySlug({ commit }, slug) {
-				// Fetch the post by it's slug in the `posts` const
-				const post = this.state.posts.find(post => slug == slug)
+			fetchPostBySlug({ commit, state }, slug) {
+				const post = state.posts.find(post => post.slug == slug)
+				console.log('Found post: ', post)
 				commit('SET_CURRENT_POST', post || null)
 			}
 		}

@@ -1,30 +1,19 @@
+<script setup>
+import { computed, ref, watch, nextTick } from 'vue'
+import { marked } from 'marked'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/atom-one-dark.css'
+
+const props = defineProps({ content: { type: String, default: '' } })
+const container = ref(null)
+const renderedContent = computed(() => marked.parse(props.content))
+
+watch(renderedContent, async () => {
+  await nextTick()
+  container.value.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block))
+})
+</script>
 
 <template>
-	<div v-html="renderedContent"></div>
+  <div ref="container" class="markdown-rendered" v-html="renderedContent"></div>
 </template>
-
-<script>
-	import { marked } from 'marked'
-	import hljs from 'highlight.js';  // wtf is highlight.js?
-	import 'highlight.js/styles/vs2015.css';  // yah sure, good stuff?
-
-	export default {
-		props: {
-			content: {
-				type: String,
-				default: ''
-			}
-		},
-		computed: {
-			renderedContent() {
-				const options = {
-					highlight: (code, lang) => {
-						return hljs.highlightAuto(code).value
-					},
-					sanitize: true
-				}
-			return marked.parse(this.content, options)
-			}
-		}
-	}
-</script>

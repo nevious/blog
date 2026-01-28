@@ -4,45 +4,36 @@
     <p class="date" v-if="post.date">{{ post.date }}</p>
     <MarkdownRenderer :content="post.content" />
 
-    <div style="margin-top: 20px;">
-      <router-link to="/">Back</router-link>
-    </div>
+	<PostPager />
   </div>
 
   <div v-else>
-    <p>Loading post...</p>
+    <p>
+		Wrong turn at Albuquerque...
+		Maybe go <router-link to="/">back...</router-link>
+    </p>
   </div>
 
-  <div v-if="posts" class="navigation">
-	<li v-for="post in posts" :key="post.slug">
-		<router-link :to="`/posts/${post.slug}`">{{ post.title }}</router-link>
-	</li>
-  </div>
 </template>
 
 <script setup>
 import { onMounted, watch, computed } from 'vue'
-import { useStore } from 'vuex'
+import { usePostStore } from '@/stores/posts'
 import { useRoute } from 'vue-router'
 import MarkdownRenderer from '../components/MarkdownRenderer.vue'
+import PostPager from '../components/PostPager.vue'
 
 // Get store and route
-const store = useStore()
+const postStore = usePostStore()
 const route = useRoute()
 
-// Function to fetch post by slug
-const fetchPost = () => {
-  console.log('Dispatching fetchPostBySlug with', route.params.slug)
-  store.dispatch('fetchPostBySlug', route.params.slug)
-}
-
 // Fetch post on mount
+// onMounted executed when BlogPost is mounted somewhere
 onMounted(async () => {
-	if (store.state.posts.length == 0) {
-		console.log('posts are empty, fetching')
-		await store.dispatch('fetchPosts')
+	if (postStore.posts.length == 0) {
+		await postStore.fetchPosts()
 	}
-	store.dispatch('fetchPostBySlug', route.params.slug)
+	postStore.fetchPostBySlug(route.params.slug)
 })
 
 // Re-fetch if the route changes
@@ -56,8 +47,8 @@ watch(
 )
 
 // Reactive reference to current post
-const post = computed(() => store.state.currentPost)
-const posts = computed(() => store.state.posts )
+const post = computed(() => postStore.currentPost)
+const posts = computed(() => postStore.posts )
 </script>
 
 <style scoped>

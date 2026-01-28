@@ -11,17 +11,17 @@
 
 <script setup>
 	import { onMounted, computed } from 'vue'
-	import { useStore } from 'vuex'
+	import { usePostStore } from '@/stores/posts'
 
 	// Access the store
-	const store = useStore()
+	const postStore = usePostStore()
 
 	// Fetch all posts on mount
 	onMounted(() => {
-	  store.dispatch('fetchPosts')
+		postStore.fetchPosts()
 	})
 
-	const posts = computed(() => store.state.posts)
+	const posts = computed(() => postStore.posts)
 </script>
 
 <style>

@@ -1,6 +1,6 @@
 // State management with veux, while 'by default'
 // the setup gives you pinia (src/stores/counter.js)
-// check out later - might need help.
+// rewrite it to pinia, leaving it here for future reference
 
 import { createStore } from 'vuex'
 

@@ -12,14 +12,12 @@
 //
 //app.mount('#app')
 
-// Based on tutorial
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import { createPinia } from 'pinia'
 
 // import css
 import './assets/styles.css'
 
-createApp(App).use(router).use(store).mount('#app')
+createApp(App).use(router).use(createPinia()).mount('#app')

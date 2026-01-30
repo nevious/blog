@@ -12,8 +12,12 @@ export const usePostStore = defineStore('postStore', () => {
 		)
 	}
 
+	function getPostIndex() {
+		return posts.value.findIndex(post => post.slug == currentPost.value.slug)
+	}
+
 	function getNextPost() {
-		var index = posts.value.findIndex(post => post.slug == currentPost.value.slug)
+		var index = getPostIndex()
 		if ( index >= 0 && index < posts.value.length - 1){
 			return posts.value.at(index+1)
 		}
@@ -21,8 +25,8 @@ export const usePostStore = defineStore('postStore', () => {
 	}
 
 	function getPreviousPost(){
-		var index = posts.value.findIndex(post => post.slug == currentPost.value.slug)
-		if ( index > 0){
+		var index = getPostIndex()
+		if ( index > 0 ) {
 			return posts.value.at(index-1)
 		}
 		return posts.value.at(-1)

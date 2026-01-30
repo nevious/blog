@@ -8,10 +8,7 @@
   </div>
 
   <div v-else>
-    <p>
-		Wrong turn at Albuquerque...
-		Maybe go <router-link to="/">back...</router-link>
-    </p>
+    <p>Wrong turn at Albuquerque... mayb go <router-link to="/">back...</router-link></p>
   </div>
 
 </template>
@@ -27,28 +24,24 @@ import PostPager from '../components/PostPager.vue'
 const postStore = usePostStore()
 const route = useRoute()
 
-// Fetch post on mount
-// onMounted executed when BlogPost is mounted somewhere
+// Making sure to load all posts if this component is mounted.
 onMounted(async () => {
 	if (postStore.posts.length == 0) {
-		await postStore.fetchPosts()
+		await postStore.loadPosts()
 	}
-	postStore.fetchPostBySlug(route.params.slug)
+	postStore.loadPostBySlug(route.params.slug)
 })
 
 // Re-fetch if the route changes
-//watch(() => route.params.slug, fetchPost)
 watch(
 	() => route.params.slug,
-	(oldSlug, newSlug) => {
-		console.log('watch() called from: ', oldSlug, ' to ', newSlug)
-		fetchPost()
+	(newSlug, oldSlug) => {
+		postStore.loadPostBySlug(newSlug)
 	}
 )
 
 // Reactive reference to current post
 const post = computed(() => postStore.currentPost)
-const posts = computed(() => postStore.posts )
 </script>
 
 <style scoped>

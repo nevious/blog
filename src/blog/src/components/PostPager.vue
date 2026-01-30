@@ -1,7 +1,7 @@
 <template>
 	<nav class="postPagerNav">
-		<router-link :to="`/posts/${previousPost.slug}`">Previous ({{previousPost.title }})</router-link>
-		<router-link :to="`/posts/${nextPost.slug}`">Next ({{ nextPost.title }})</router-link>
+		<router-link :to="`/posts/${previousPost.slug}`"><< {{previousPost.title }}</router-link>
+		<router-link :to="`/posts/${nextPost.slug}`"> {{ nextPost.title }} >></router-link>
 	</nav>
 </template>
 

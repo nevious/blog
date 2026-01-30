@@ -9,20 +9,3 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }
-
-.markdown-rendered {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-}
-
-.markdown-rendered h1,
-.markdown-rendered h2,
-.markdown-rendered h3 {
-  color: #333;
-}
-
-.markdown-rendered code {
-  background-color: #f4f4f4;
-  padding: 2px 4px;
-  border-radius: 4px;
-}

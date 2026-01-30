@@ -11,14 +11,11 @@
 
 <script setup>
 	import { onMounted, computed } from 'vue'
-	import { usePostStore } from '@/stores/posts'
+	import { usePostStore } from '@/stores/glogPost'
 
-	// Access the store
 	const postStore = usePostStore()
-
-	// Fetch all posts on mount
-	onMounted(() => {
-		postStore.fetchPosts()
+	onMounted(async () => {
+		await postStore.loadPosts()
 	})
 
 	const posts = computed(() => postStore.posts)

@@ -15,7 +15,7 @@
 
 <script setup>
 import { onMounted, watch, computed } from 'vue'
-import { usePostStore } from '@/stores/posts'
+import { usePostStore } from '@/stores/glogPost'
 import { useRoute } from 'vue-router'
 import MarkdownRenderer from '../components/MarkdownRenderer.vue'
 import PostPager from '../components/PostPager.vue'

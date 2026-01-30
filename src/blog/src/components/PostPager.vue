@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-	import { onMounted, computed } from 'vue'
-	import { usePostStore } from '@/stores/posts'
+	import { onMounted, computed, watch } from 'vue'
+	import { usePostStore } from '@/stores/glogPost'
 	import { useRoute } from 'vue-router'
 
 	const postStore = usePostStore()
@@ -15,6 +15,18 @@
 
 	const nextPost = computed(() => postStore.getNextPost())
 	const previousPost = computed(() => postStore.getPreviousPost())
+
+	watch(
+		() => route.params.slug,
+		(newSlug, oldSlug) => {
+			const nextPost = postStore.getNextPost()
+			const previousPost = postStore.getPreviousPost()
+		}
+	)
+
+	console.log('posts: %o', postStore.posts)
+	console.log("nextPost: %o", nextPost.value)
+	console.log("previousPost: %o", previousPost.value)
 </script>
 
 <style scoped>

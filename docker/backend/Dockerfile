@@ -10,5 +10,5 @@ WORKDIR /src/
 
 USER 1000:1000
 
-EXPOSE 80/tcp 443/tcp 8080/tcp
+EXPOSE 8080/tcp
 CMD ["air", "-c", ".air.toml"]

@@ -7,5 +7,5 @@ USER 1000:1000
 
 WORKDIR /src/
 
-EXPOSE 80/tcp 443/tcp 5173/tcp
+EXPOSE 5173/tcp
 CMD ["npm", "run", "dev", "--host"]

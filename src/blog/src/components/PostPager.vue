@@ -23,10 +23,6 @@
 			const previousPost = postStore.getPreviousPost()
 		}
 	)
-
-	console.log('posts: %o', postStore.posts)
-	console.log("nextPost: %o", nextPost.value)
-	console.log("previousPost: %o", previousPost.value)
 </script>
 
 <style scoped>

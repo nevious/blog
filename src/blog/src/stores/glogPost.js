@@ -13,7 +13,6 @@ export const usePostStore = defineStore('glogStore', () => {
 
 	function getNextPost() {
 		const index = getPostIndex()
-		console.log("current index: %i", index)
 		if ( index >= 0 && index < posts.value.length - 1){
 			return posts.value.at(index+1)
 		}
@@ -22,7 +21,6 @@ export const usePostStore = defineStore('glogStore', () => {
 
 	function getPreviousPost(){
 		const index = getPostIndex()
-		console.log("current index: %i", index)
 		if ( index > 0 ) {
 			return posts.value.at(index-1)
 		}
@@ -33,7 +31,6 @@ export const usePostStore = defineStore('glogStore', () => {
 		try {
 			posts.value = await fetchPosts()
 		} catch (err) {
-			console.log("Got error in loadPosts(): %o", err)
 			error = err
 		}
 	}

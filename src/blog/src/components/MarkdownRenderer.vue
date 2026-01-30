@@ -17,3 +17,11 @@ watch(renderedContent, async () => {
 <template>
   <div ref="container" class="markdown-rendered" v-html="renderedContent"></div>
 </template>
+
+<style scoped>
+:deep(blockquote) {
+  background-color: #ccc;
+  padding: 1rem;
+  border-left: 4px solid #999;
+}
+</style>

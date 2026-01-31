@@ -15,6 +15,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/backend/Dockerfile
+    environment:
+      MODE: development
     volumes:
       - ./src/glog:/src
     ports:

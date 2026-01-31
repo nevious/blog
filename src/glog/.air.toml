@@ -56,3 +56,6 @@ tmp_dir = "tmp"
 [screen]
   clear_on_rebuild = false
   keep_scroll = true
+
+[watch]
+  include = ["etc/*.toml", "*.go"]

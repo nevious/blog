@@ -5,6 +5,7 @@ LABEL version=1
 RUN apk add bash curl
 RUN go install github.com/air-verse/air@latest
 RUN mkdir /.cache/
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
 RUN chown -R 1000:1000 /.cache/ /go
 WORKDIR /src/
 

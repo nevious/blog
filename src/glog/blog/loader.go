@@ -6,7 +6,8 @@ import (
 	"sync";
 	"path"
 
-	"github.com/adrg/frontmatter";
+	"github.com/adrg/frontmatter"
+	"github.com/spf13/viper"
 )
 
 func init() {

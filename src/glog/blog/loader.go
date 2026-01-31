@@ -4,7 +4,9 @@ import (
 	"os";
 	"strings";
 	"sync";
-	"path"
+	"path/filepath"
+	"io/fs"
+	"log"
 
 	"github.com/adrg/frontmatter"
 	"github.com/spf13/viper"
@@ -31,29 +33,36 @@ var (
 	postMu sync.RWMutex
 )
 
-func LoadPosts() error {
-	files, err := os.ReadDir("data")
-	if err != nil { return err }
+func loadPosts() (map[string]*Post, error) {
+	viper.SetDefault("service.data_dir", "data")
+	root := viper.GetString("service.data_dir")
+	files := []string{}
 
-	temp := map[string]*Post{}
-
-	for _, f := range files {
-		if f.IsDir() || !strings.HasSuffix(f.Name(), ".md") {
-			continue
+	err := filepath.WalkDir(root, func(p string, d fs.DirEntry, err error) error {
+		// if we encounter an error, we skip the directory
+		if err != nil {
+			log.Printf("Skipping directory '%s' due to error %v", p, err)
+			return fs.SkipDir
 		}
 
-		//p, err := loadPost("data/" + f.Name())
-		p, err := loadPost(path.Join("data", f.Name()))
-		if err != nil { return err }
+		if !d.IsDir() && strings.HasSuffix(d.Name(), ".md") {
+			files = append(files, p)
+		}
 
-		temp[p.Meta.Slug] = p
+		return nil
+	})
+	if err != nil { return nil, err }
+
+	buffer_posts := map[string]*Post{}
+	for _, f := range files {
+		p, err := loadPost(f)
+		if err != nil { return nil, err }
+
+		buffer_posts[p.Meta.Slug] = p
 	}
 
-	postMu.Lock()
-	posts = temp
-	postMu.Unlock()
 
-	return nil
+	return buffer_posts, nil
 }
 
 func loadPost(path string) (*Post, error) {
@@ -90,4 +99,16 @@ func GetPost(slug string) *Post {
 	}
 
 	return nil
+}
+
+func ReloadLoad() {
+	postMu.Lock()
+	defer postMu.Unlock()
+
+	_, err := loadPosts()
+	if err != nil {
+		log.Printf("Error encountered when loading posts, not replacing existing")
+	} else {
+		posts = _
+	}
 }

@@ -41,6 +41,6 @@ func GetPostBySlug(c *gin.Context) {
 }
 
 func ReloadPosts(c *gin.Context) {
-	blog.LoadPosts()
+	blog.ReloadLoad()
 	c.Status(http.StatusAccepted)
 }

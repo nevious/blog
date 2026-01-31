@@ -1,6 +1,6 @@
 ---
 title: MD in subdir
-date: 30.1.2026
+date: 2026-01-30
 author: nevi
 slug: subdir
 ---

@@ -2,23 +2,21 @@ package blog
 
 import (
 	"os";
-	"strings";
-	"sync";
+	"strings"
+	"sync"
 	"path/filepath"
 	"io/fs"
 	"log"
+	"time"
 
 	"github.com/adrg/frontmatter"
 	"github.com/spf13/viper"
-)
 
-func init() {
-	// load viper config once we introduce it
-}
+)
 
 type PostMeta struct {
 	Title string `yaml:"title" json:"title"`
-	Date string `yaml:"date" json:"date"`
+	Date time.Time `yaml:"date" json:"date"`
 	Slug string `yaml:"slug" json:"slug"`
 	Author string `yaml:"author" json:"author"`
 }
@@ -55,7 +53,7 @@ func loadPosts() (map[string]*Post, error) {
 
 	buffer_posts := map[string]*Post{}
 	for _, f := range files {
-		p, err := loadPost(f)
+		p, err := loadPostFromFile(f)
 		if err != nil { return nil, err }
 
 		buffer_posts[p.Meta.Slug] = p
@@ -65,7 +63,7 @@ func loadPosts() (map[string]*Post, error) {
 	return buffer_posts, nil
 }
 
-func loadPost(path string) (*Post, error) {
+func loadPostFromFile(path string) (*Post, error) {
 	f, err := os.Open(path)
 	if err != nil { return nil, err}
 
@@ -78,7 +76,7 @@ func loadPost(path string) (*Post, error) {
 	return &Post{Meta: meta, Content: string(content)}, nil
 }
 
-func GetAllPosts() []PostMeta {
+func GetAllPostsMeta() []PostMeta {
 	postMu.Lock()
 	defer postMu.Unlock()
 
@@ -105,10 +103,11 @@ func ReloadLoad() {
 	postMu.Lock()
 	defer postMu.Unlock()
 
-	_, err := loadPosts()
+	buffer, err := loadPosts()
 	if err != nil {
 		log.Printf("Error encountered when loading posts, not replacing existing")
+		log.Printf("Error was: %v", err)
 	} else {
-		posts = _
+		posts = buffer
 	}
 }

@@ -1,7 +1,7 @@
 ---
 title: First
 author: Nevi
-date: 29.1.2026
+date: 2025-01-29
 slug: first
 ---
 

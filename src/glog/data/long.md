@@ -1,7 +1,7 @@
 ---
 title: This is a long post
 author: Nevi
-date: 29.1.2026
+date: 2026-01-29
 slug: long-post
 ---
 

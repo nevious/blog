@@ -21,7 +21,7 @@ func Echo(c *gin.Context) {
 }
 
 func GetPosts(c *gin.Context) {
-	posts := blog.GetAllPosts()
+	posts := blog.GetAllPostsMeta()
 	sort.Slice(posts, func(i int, j int) bool {
 		return posts[i].Title < posts[j].Title
 	})

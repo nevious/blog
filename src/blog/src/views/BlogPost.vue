@@ -1,7 +1,8 @@
 <template>
   <div v-if="post" class="blog-post">
-    <h1>{{ post.title }}</h1>
-    <p class="date" v-if="post.date">{{ post.date }}</p>
+    <h1>{{ post.meta.title }}</h1>
+    <p class="date" v-if="post.meta.date">{{ dateFormatter(post.meta.date) }}</p>
+
     <MarkdownRenderer :content="post.content" />
 
 	<PostPager />
@@ -24,6 +25,12 @@ import PostPager from '../components/PostPager.vue'
 const postStore = usePostStore()
 const route = useRoute()
 
+// date formatter
+const dateFormatter = (dateString) => {
+	const d = new Date()
+	return d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })
+}
+
 // Making sure to load all posts if this component is mounted.
 onMounted(async () => {
 	if (postStore.posts.length == 0) {
@@ -42,6 +49,7 @@ watch(
 
 // Reactive reference to current post
 const post = computed(() => postStore.currentPost)
+console.log("Current post: %o", postStore.currentPost)
 </script>
 
 <style scoped>

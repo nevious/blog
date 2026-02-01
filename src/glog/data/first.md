@@ -3,6 +3,7 @@ title: First
 author: Nevi
 date: 2025-01-29
 slug: first
+category: dummy
 ---
 
 # First

@@ -19,6 +19,7 @@ type PostMeta struct {
 	Date time.Time `yaml:"date" json:"date"`
 	Slug string `yaml:"slug" json:"slug"`
 	Author string `yaml:"author" json:"author"`
+	Category string `yaml:"category" json:"category"`
 }
 
 type Post struct {

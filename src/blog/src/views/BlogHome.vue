@@ -21,7 +21,7 @@
 	const posts = computed(() => postStore.posts)
 </script>
 
-<style>
+<style scoped>
 	.post-list {
 		list-style: none;
 		padding: 0;

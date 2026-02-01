@@ -1,7 +1,11 @@
 <template>
   <div v-if="post" class="blog-post">
     <h1>{{ post.meta.title }}</h1>
-    <p class="date" v-if="post.meta.date">{{ dateFormatter(post.meta.date) }}</p>
+	<div class="frontmatter">
+		<p v-if="post.meta.date">on: {{ dateFormatter(post.meta.date) }}</p>
+		<p v-if="post.meta.author">by: {{ post.meta.author }}</p>
+		<p v-if="post.meta.category">in: {{ post.meta.category }}</p>
+	</div>
 
     <MarkdownRenderer :content="post.content" />
 
@@ -53,6 +57,14 @@ console.log("Current post: %o", postStore.currentPost)
 </script>
 
 <style scoped>
+.frontmatter {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	font-size: 0.8rem;
+	color: #666;
+}
+
 .blog-post {
   max-width: 800px;
   margin: 0 auto;

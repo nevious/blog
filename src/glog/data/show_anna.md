@@ -3,6 +3,7 @@ title: Markdown Formatting Showcase
 date: 2026-01-30
 author: GeePeeTee
 slug: geept-show-off
+category: dummy
 ---
 
 # Heading 1

@@ -1,6 +1,6 @@
 <template>
   <div v-if="post" class="blog-post">
-    <h1>{{ post.meta.title }}</h1>
+    <h2>{{ post.meta.title }}</h2>
 	<div class="frontmatter">
 		<p v-if="post.meta.date">on: {{ dateFormatter(post.meta.date) }}</p>
 		<p v-if="post.meta.author">by: {{ post.meta.author }}</p>
@@ -53,21 +53,28 @@ watch(
 
 // Reactive reference to current post
 const post = computed(() => postStore.currentPost)
-console.log("Current post: %o", postStore.currentPost)
 </script>
 
 <style scoped>
 .frontmatter {
 	display: flex;
 	justify-content: space-between;
-	flex-wrap: wrap;
 	font-size: 0.8rem;
+	flex-shrink: 1;
 	color: #666;
 }
 
 .blog-post {
-  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100vw;        /* take full viewport width */
+  flex-basis: 1;
   margin: 0 auto;
+  padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-grow: 1;
 }
 
 .markdown-rendered {

@@ -1,7 +1,12 @@
 <template>
 	<nav class="postPagerNav">
-		<router-link :to="`/posts/${previousPost.slug}`"><<{{previousPost.title }}</router-link>
-		<router-link :to="`/posts/${nextPost.slug}`">{{ nextPost.title }} >></router-link>
+		<router-link :to="`/posts/${previousPost.slug}`">
+			<Button class="min-width" title="Previous" :description="previousPost.title" />
+		</router-link>
+
+		<router-link :to="`/posts/${nextPost.slug}`">
+			<Button class="min-width right-bound" title="Next" :description="nextPost.title" />
+		</router-link>
 	</nav>
 </template>
 
@@ -9,6 +14,7 @@
 	import { onMounted, computed, watch } from 'vue'
 	import { usePostStore } from '@/stores/glogPost'
 	import { useRoute } from 'vue-router'
+	import Button from './Button.vue'
 
 	const postStore = usePostStore()
 	const route = useRoute()
@@ -27,7 +33,17 @@
 
 <style scoped>
 .postPagerNav {
+	margin-top: 2rem;
 	display: flex;
 	justify-content: space-between;
+}
+
+.min-width {
+	min-width: 5rem;
+	margin: 0;
+}
+
+.right-bound {
+	text-align: right;
 }
 </style>

@@ -1,11 +1,36 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
+:root {
+	/* Accents */
+	--primary-accent-color: oklch(12.9% 0.042 264.695);
+	--secondary-accent-color: oklch(30.2% 0.056 229.695);
+	--primary-accent-comp: oklch(52.7% 0.154 330.069);
+	--primary-body-color: oklch(98.5% 0.002 247.839);
+
+	/* Font colors */
+	--primary-font-color: oklch(98.4% 0.019 200.873);
+
+	/* Sizes */
+	--button-title-size: small;
+	--button-description-size: x-small;
 }
 
-.blog-home,
-.blog-post {
-  max-width: 800px;
-  margin: 0 auto;
+body {
+  /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Open Sans", sans-serif;*/
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+  background-color: var(--primary-body-color);
+}
+
+.isolate {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+	text-decoration: none;
+	color: inherit;
 }

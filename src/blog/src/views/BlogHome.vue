@@ -1,19 +1,22 @@
 <template>
 	<div class="blog-container">
-		<router-link v-if="featuredPost" class="blog-item feature" :to="featuredPost.slug">
-			<div class="card-title"><h3>{{ featuredPost.title }}</h3></div>
-			<div class="card-description">{{ featuredPost.description || "Some featured description text"}}</div>
+		<router-link v-if="featuredPost" class="blog-item feature" :to="`/posts/${featuredPost.slug}`">
+			<Card :title="featuredPost.title"
+				:description="featuredPost.description"
+				:background="featuredPost.splash ? `url(${featuredPost.splash})` : undefined" />
 		</router-link>
 
-		<router-link class="blog-item" v-for="post in posts" :key="post.slug" :to="`/posts/${post.slug}`">{{ post.title }}
-			<div class="card-title"><h3>{{ post.title }}</h3></div>
-			<div class="card-description">{{ post.description || "Some descriptive test" }}</div>
+		<router-link class="blog-item" v-for="post in posts" :key="post.slug" :to="`/posts/${post.slug}`">
+			<Card :title="post.title"
+				:description="post.description"
+				:background="post.splash ? `url(${post.splash})` : undefined" />
 		</router-link>
 	</div>
 </template>
 
 <script setup>
 	import { onMounted, computed } from 'vue'
+	import Card from '@/components/Card.vue'
 	import { usePostStore } from '@/stores/glogPost'
 
 	const postStore = usePostStore()
@@ -23,20 +26,11 @@
 
 	const featuredPost = computed(() => postStore.posts[0])
 	const posts = computed(() => postStore.posts.slice(1))
-	console.log("featured: %o", featuredPost)
-	console.log("posts: %o", posts)
+
+	console.log("Posts: %o", posts)
 </script>
 
 <style scoped>
-
-.post-list {
-	list-style: none;
-	padding: 0;
-}
-
-.post-list li {
-	margin-bottom: 20px;
-}
 
 .blog-container {
 	flex-grow: 1;
@@ -49,18 +43,17 @@
 }
 
 .blog-item {
-	display: block;
 	flex: 1 1 calc(33.333% - 2rem);
 	box-sizing: border-box;
-	/*border: 1px solid var(--primary-accent-color);*/
 	box-shadow: 0 0 0 1.2px var(--primary-accent-color);
 	border-radius: 8px;
-	padding: 1rem;
+	max-height: 250px;
 	transition: transform 0.2s;
+	overflow: hidden;
 }
 
 .blog-item:hover {
-	transform: rotate(1deg) scale(1.03) ;
+	transform: rotate(1deg) scale(1.02) ;
 }
 
 .blog-item a,
@@ -74,5 +67,7 @@
 
 .feature {
 	flex: 0 0 100%;
+	height: 350px;
+	max-height: 350px;
 }
 </style>

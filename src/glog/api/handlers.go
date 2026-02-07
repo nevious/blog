@@ -23,7 +23,7 @@ func Echo(c *gin.Context) {
 func GetPosts(c *gin.Context) {
 	posts := blog.GetAllPostsMeta()
 	sort.Slice(posts, func(i int, j int) bool {
-		return posts[i].Title < posts[j].Title
+		return posts[i].Date.After(posts[j].Date)
 	})
 	c.JSON(http.StatusOK, posts)
 }

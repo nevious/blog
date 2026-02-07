@@ -20,6 +20,8 @@ type PostMeta struct {
 	Slug string `yaml:"slug" json:"slug"`
 	Author string `yaml:"author" json:"author"`
 	Category string `yaml:"category" json:"category"`
+	Description string `yaml:"description" json:"description"`
+	Splash string `yaml:"splash" json:"splash"`
 }
 
 type Post struct {
@@ -46,6 +48,7 @@ func loadPosts() (map[string]*Post, error) {
 
 		if !d.IsDir() && strings.HasSuffix(d.Name(), ".md") {
 			files = append(files, p)
+			log.Printf("Adding file: %v", p)
 		}
 
 		return nil

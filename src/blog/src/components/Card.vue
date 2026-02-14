@@ -19,31 +19,31 @@
 </script>
 
 <style scoped>
-.card-inner {
-  display: grid;
-  grid-template-rows: 1.5fr 1fr;
-  height: 100%;
-}
+	.card-inner {
+		display: grid;
+		grid-template-rows: 1.5fr 1fr;
+		height: 100%;
+	}
 
-.heading {
-  flex: 0 0 33%; /* top third */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: var(--background, linear-gradient(to right, var(--default-splash-color), var(--secondary-accent-color)));
-  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.2);
-  background-size: cover;     /* scales the image to fully cover the div */
-  background-position: center; /* centers the image */
-  background-repeat: no-repeat; /* prevents tiling */
-}
+	.heading {
+		flex: 0 0 33%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem;
+		background: var(--background, linear-gradient(to right, var(--default-splash-color), var(--secondary-accent-color)));
+		box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.2);
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
 
-.description h3 {
-	margin: 1rem 1rem 0.2rem 1rem;
-}
+	.description h3 {
+		margin: 1rem 1rem 0.2rem 1rem;
+	}
 
-.description p {
-  padding: 0rem 1rem;
-  font-size: small;
-}
+	.description p {
+		padding: 0rem 1rem;
+		font-size: small;
+	}
 </style>

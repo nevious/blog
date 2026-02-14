@@ -1,6 +1,4 @@
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost/"
-console.log("environment: %o", import.meta.env)
-
 
 export async function fetchPosts() {
 	const response = await fetch(`${API_BASE}/posts`)

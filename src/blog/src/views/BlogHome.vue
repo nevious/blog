@@ -20,6 +20,7 @@
 	import { usePostStore } from '@/stores/glogPost'
 
 	const postStore = usePostStore()
+
 	onMounted(async () => {
 		await postStore.loadPosts()
 	})
@@ -55,9 +56,9 @@
 }
 
 .blog-item:not(.feature) {
-  flex: 1 1 calc((100% - 2rem*2)/3); /* 3 items per row, accounting for 2 gaps */
-  max-width: calc((100% - 2rem*2)/3);
-  min-width: 250px;  /* optional for small screens */
+	flex: 1 1 calc((100% - 2rem*2)/3);
+	max-width: calc((100% - 2rem*2)/3);
+	min-width: 250px;
 }
 
 .blog-item:hover {

@@ -19,24 +19,24 @@
 </script>
 
 <style scoped>
-.title {
-	color: var(--primary-font-color);
-	font-size: var(--button-title-size);
-}
+	.title {
+		color: var(--primary-font-color);
+		font-size: var(--button-title-size);
+	}
 
-.description {
-	font-size: var(--button-description-size);
-	color: var(--primary-font-color);
-}
+	.description {
+		font-size: var(--button-description-size);
+		color: var(--primary-font-color);
+	}
 
-.button {
-	background-color: var(--secondary-accent-color);
-	border-radius: var(--border-radius);
-	padding: 0.3rem 0.6rem 0.3rem 0.6rem;
-	margin: 0 0.5rem 0 0.5rem;
-}
+	.button {
+		background-color: var(--secondary-accent-color);
+		border-radius: var(--border-radius);
+		padding: 0.3rem 0.6rem 0.3rem 0.6rem;
+		margin: 0 0.5rem 0 0.5rem;
+	}
 
-.button:hover {
-	background-color: var(--ternary-accent-color);
-}
+	.button:hover {
+		background-color: var(--ternary-accent-color);
+	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="blog-container">
+	<div v-if="posts?.length > 0" class="blog-container">
 		<router-link v-if="featuredPost" class="blog-item feature" :to="`/posts/${featuredPost.slug}`">
 			<Card :title="featuredPost.title"
 				:description="featuredPost.description"
@@ -11,6 +11,13 @@
 				:description="post.description"
 				:background="post.splash ? `url(${post.splash})` : undefined" />
 		</router-link>
+	</div>
+
+	<div v-else class="blog-container">
+		<div class="fallback">
+			<h1>We'll see you soon....</h1>
+			<p>Nothing to see here yet.</p>
+		</div>
 	</div>
 </template>
 
@@ -78,5 +85,9 @@ a:active {
 	flex: 0 0 100%;
 	height: 350px;
 	max-height: 350px;
+}
+
+.fallback {
+	margin: auto;
 }
 </style>

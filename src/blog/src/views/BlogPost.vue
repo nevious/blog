@@ -10,9 +10,9 @@
 
 		<MarkdownRenderer :content="post.content" />
 		<PostPager />
-  </div>
+	</div>
 
-	<div v-else>
+	<div v-else class="blog-post">
 		<p>Wrong turn at Albuquerque... mayb go <router-link to="/">back...</router-link></p>
 	</div>
 

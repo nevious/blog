@@ -1,6 +1,7 @@
 export const config = {
 	site: {
-		title: "Nevi's explorations",
+		title: "N E V I",
+		logo: '/public/logo_white.svg',
 		description: "... getting there, one step at a time...",
 		image: "https://next.nevious.ch/s/XrAFg5QWq64peMt/download"
 	}

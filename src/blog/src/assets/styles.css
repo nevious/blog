@@ -1,17 +1,34 @@
 :root {
-	/* Accents */
-	--primary-accent-color: oklch(12.9% 0.042 264.695);
-	--secondary-accent-color: oklch(30.2% 0.056 229.695);
-	--primary-accent-comp: oklch(52.7% 0.154 330.069);
-	--primary-body-color: oklch(98.5% 0.002 247.839);
-	--splash-default-color: oklch(55.4% 0.046 257.417);
+	/* Design Colors */
+	--primary-body-color: oklch(0.9407 0.002 247.839);
+	--default-splash-color: oklch(0.6533 0.14 210.71);
+
+	/* Accents and colors */
+	--primary-accent-color: oklch(0.4132 0.0814 229.695);
+	--primary-accent-color-25: oklch(0.4132 0.0814 229.695 / 0.25);
+	--primary-accent-color-50: oklch(0.4132 0.0814 229.695 / 0.50);
+	--primary-accent-color-75: oklch(0.4132 0.0814 229.695 / 0.75);
+	--primary-accent-color-95: oklch(0.4132 0.0814 229.695 / 0.95);
+
+	--secondary-accent-color: oklch(0.5519 0.1021 229.24);
+	--secondary-accent-color-25: oklch(0.5519 0.1021 229.24 / 0.25);
+	--secondary-accent-color-50: oklch(0.5519 0.1021 229.24 / 0.50);
+	--secondary-accent-color-75: oklch(0.5519 0.1021 229.24 / 0.75);
+	--secondary-accent-color-95: oklch(0.5519 0.1021 229.24 / 0.95);
+
+	--ternary-accent-color: oklch(0.5519 0.0814 198.69);
+	--ternary-accent-color-25: oklch(0.5519 0.0814 198.69 / 0.25);
+	--ternary-accent-color-50: oklch(0.5519 0.0814 198.69 / 0.50);
+	--ternary-accent-color-75: oklch(0.5519 0.0814 198.69 / 0.75);
+	--ternary-accent-color-95: oklch(0.5519 0.0814 198.69 / 0.95);
 
 	/* Font colors */
 	--primary-font-color: oklch(98.4% 0.019 200.873);
 
 	/* Sizes */
-	--button-title-size: small;
-	--button-description-size: x-small;
+	--button-title-size: medium;
+	--button-description-size: small;
+	--border-radius: 5px;
 }
 
 body {
@@ -27,11 +44,15 @@ body {
 	min-height: 100vh
 }
 
-a,
+/*a,
 a:link,
 a:visited,
 a:hover,
 a:active {
 	text-decoration: none;
 	color: inherit;
+}*/
+
+li {
+	list-style-type: none;
 }

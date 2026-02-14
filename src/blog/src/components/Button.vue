@@ -31,12 +31,12 @@
 
 .button {
 	background-color: var(--secondary-accent-color);
-	border-radius: 15px;
+	border-radius: var(--border-radius);
 	padding: 0.3rem 0.6rem 0.3rem 0.6rem;
 	margin: 0 0.5rem 0 0.5rem;
 }
 
 .button:hover {
-	background-color: var(--primary-accent-comp);
+	background-color: var(--ternary-accent-color);
 }
 </style>

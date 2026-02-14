@@ -46,4 +46,11 @@
 .right-bound {
 	text-align: right;
 }
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+	text-decoration: none;
+}
 </style>

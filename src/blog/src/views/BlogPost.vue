@@ -1,6 +1,6 @@
 <template>
   <div v-if="post" class="blog-post">
-    <h2>{{ post.meta.title }}</h2>
+    <h1>{{ post.meta.title }}</h1>
 	<div class="frontmatter">
 		<p v-if="post.meta.date">on: {{ dateFormatter(post.meta.date) }}</p>
 		<p v-if="post.meta.author">by: {{ post.meta.author }}</p>

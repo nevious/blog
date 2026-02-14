@@ -20,8 +20,8 @@ watch(renderedContent, async () => {
 
 <style scoped>
 :deep(blockquote) {
-  background-color: #ccc;
+  background-color: var(--secondary-accent-color-25);
   padding: 1rem;
-  border-left: 4px solid #999;
+  border-left: 4px solid var(--primary-accent-color);
 }
 </style>

@@ -40,27 +40,35 @@
 	flex-wrap: wrap;
 	gap: 2rem;
 	padding: 2rem;
+	justify-content: center;
 }
 
 .blog-item {
 	flex: 1 1 calc(33.333% - 2rem);
+	flex-wrap: wrap;
 	box-sizing: border-box;
 	box-shadow: 0 0 0 1.2px var(--primary-accent-color);
-	border-radius: 8px;
+	border-radius: var(--border-radius);
 	max-height: 250px;
 	transition: transform 0.2s;
 	overflow: hidden;
+}
+
+.blog-item:not(.feature) {
+  flex: 1 1 calc((100% - 2rem*2)/3); /* 3 items per row, accounting for 2 gaps */
+  max-width: calc((100% - 2rem*2)/3);
+  min-width: 250px;  /* optional for small screens */
 }
 
 .blog-item:hover {
 	transform: rotate(1deg) scale(1.02) ;
 }
 
-.blog-item a,
-.blog-item a:link,
-.blog-item a:visited,
-.blog-item a:hover,
-.blog-item a:active {
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
 	text-decoration: none;
 	color: inherit;
 }

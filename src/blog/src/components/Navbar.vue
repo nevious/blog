@@ -4,9 +4,9 @@
 		<Button title="Home" />
 	</router-link>
 
-    <router-link to="/">
+    <!-- <router-link to="/">
 		<Button title="Categories" />
-	</router-link>
+	</router-link> -->
 
 	<router-link class="grow" to="">
 		<SearchBar />

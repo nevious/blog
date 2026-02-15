@@ -14,9 +14,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 100vw;        /* take full viewport width */
+	width: 100vw;
 	flex-basis: 1;
 	margin: 0 auto;
+	box-sizing: border-box;
 	padding: 1rem;
 	max-width: 900px;
 	margin: 0 auto;

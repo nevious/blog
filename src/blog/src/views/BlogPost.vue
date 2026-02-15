@@ -74,7 +74,8 @@
 		max-width: 900px;
 		margin: 0 auto;
 		flex-grow: 1;
-		padding-bottom: 1rem;
+		box-sizing: border-box;
+		padding: 1rem;
 	}
 
 	.markdown-rendered {

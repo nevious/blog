@@ -13,7 +13,7 @@
 		</router-link>
 
 		<router-link to="/about">
-			<Button title="About me" />
+			<Button title="About" />
 		</router-link>
 	</nav>
 </template>

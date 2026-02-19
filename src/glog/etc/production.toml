@@ -3,4 +3,4 @@ port = 8080
 data_dir = "./data/"
 
 [headers]
-allow_origin = "https://nevi-blog.netlify.app/"
+allow_origin = "https://nevi-blog.netlify.app"

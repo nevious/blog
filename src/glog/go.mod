@@ -1,6 +1,6 @@
 module glog
 
-go 1.25.6
+go 1.25
 
 require (
 	github.com/adrg/frontmatter v0.2.0

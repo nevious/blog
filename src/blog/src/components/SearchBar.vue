@@ -39,7 +39,6 @@
 	}
 
 	function handleKeyEvent(event) {
-		console.log("searchInput: %o", searchInput.value)
 		if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
 			event.preventDefault()
 			searchInput.value.focus()

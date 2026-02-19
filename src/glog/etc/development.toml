@@ -1,6 +1,6 @@
 [service]
 port = 8080
-data_dir = "./data_dev/"
+data_dir = "./data_preview/"
 
 [headers]
 allow_origin = "http://localhost:5173"

@@ -1,5 +1,5 @@
 <template>
-	<div v-if="posts?.length > 0" class="blog-container">
+	<div v-if="posts?.length > 0 || featuredPost !== 'undefined'" class="blog-container">
 		<router-link v-if="featuredPost" class="blog-item feature" :to="`/posts/${featuredPost.slug}`">
 			<Card :title="featuredPost.title"
 				:description="featuredPost.description"
@@ -40,13 +40,14 @@
 
 .blog-container {
 	flex-grow: 1;
-	max-width: 900px;
+	width: clamp(180px, 100%, 900px);
 	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 2rem;
 	padding: 2rem;
 	justify-content: center;
+	box-sizing: border-box;
 }
 
 .blog-item {
@@ -62,7 +63,7 @@
 
 .blog-item:not(.feature) {
 	flex: 1 1 calc((100% - 2rem*2)/3);
-	min-width: clamp(250px, calc((100% - 2rem*2)/3), 500px);
+	min-width: clamp(200px, calc((100% - 2rem*2)/3), 500px);
 }
 
 .blog-item:hover {
@@ -82,6 +83,7 @@ a:active {
 	flex: 0 0 100%;
 	height: 350px;
 	max-height: 350px;
+	box-sizing: border-box;
 }
 
 .fallback {

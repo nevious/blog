@@ -89,9 +89,8 @@
 		color: #333;
 	}
 
-	.markdown-rendered code {
-		background-color: #f4f4f4;
-		padding: 2px 4px;
-		border-radius: 4px;
+	:deep(.markdown-rendered img) {
+		width: clamp(250px, 100%, 900px);
+		height: auto;
 	}
 </style>

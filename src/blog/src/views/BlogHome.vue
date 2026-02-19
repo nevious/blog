@@ -34,8 +34,6 @@
 
 	const featuredPost = computed(() => postStore.posts[0])
 	const posts = computed(() => postStore.posts.slice(1))
-
-	console.log("Posts: %o", posts)
 </script>
 
 <style scoped>
@@ -64,8 +62,7 @@
 
 .blog-item:not(.feature) {
 	flex: 1 1 calc((100% - 2rem*2)/3);
-	max-width: calc((100% - 2rem*2)/3);
-	min-width: 250px;
+	min-width: clamp(250px, calc((100% - 2rem*2)/3), 500px);
 }
 
 .blog-item:hover {

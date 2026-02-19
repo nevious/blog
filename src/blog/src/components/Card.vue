@@ -26,7 +26,6 @@
 	}
 
 	.heading {
-		flex: 0 0 33%;
 		display: flex;
 		align-items: center;
 		justify-content: center;

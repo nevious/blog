@@ -20,7 +20,6 @@
 	import { config } from '@/config/config'
 	import { computed } from 'vue'
 	const pageSettings = computed(() => config.site )
-	console.log("config: %o", pageSettings)
 </script>
 
 <style scoped>

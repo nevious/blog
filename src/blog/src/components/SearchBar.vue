@@ -31,6 +31,7 @@
 	let results = ref(null)
 
 	function clickOutsideSearchBar(event) {
+
 		if (!searchInput.value?.contains(event.target)) {
 			results.value = null
 			searchInput.value = null
@@ -38,6 +39,7 @@
 	}
 
 	function handleKeyEvent(event) {
+		console.log("searchInput: %o", searchInput.value)
 		if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
 			event.preventDefault()
 			searchInput.value.focus()
@@ -128,6 +130,7 @@
 	}
 
 	.search input {
+		color: var(--primary-font-color);
 		width: 100%;
 		border: none;
 		background: transparent;
@@ -142,7 +145,6 @@
 
 	.search input:focus {
 		border-color: rgba(0, 0, 0, 0.35);
-		color: var(--primary-font-color)
 	}
 
 	.search input::placeholder {

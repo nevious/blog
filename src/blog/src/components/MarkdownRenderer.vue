@@ -13,9 +13,24 @@
 	const renderedContent = computed(() => marked.parse(props.content))
 
 	watch(renderedContent, async () => {
-	  await nextTick()
-	  container.value.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block))
-	})
+		await nextTick()
+		container.value.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block))
+		// understanding:
+		// passing { immediate: true} forces the watcher to "fire" essentially like "onMounted()"
+		// replacing this watcher with onMounted however doesn't work as the component HAS been mounted
+		// but the v-html portion might still be loading
+		container.value.querySelectorAll('img').forEach( image => {
+			image.style.filter = 'blur(10px)'
+			image.style.opacity = '0'
+			image.style.transition = 'filter 0.3s ease, opacity 0.3s ease'
+			image.loading = 'lazy'
+
+			image.onload = () => {
+				image.style.filter = 'blur(0)'
+				image.style.opacity = '1'
+			}
+		})
+	}, { immediate: true })
 </script>
 
 <style scoped>

@@ -25,7 +25,6 @@ type PostMeta struct {
 }
 
 func (m *PostMeta) normalize() {
-	log.Println("HELLO NORM")
 	tags := m.Category
 	var tags_norm []string
 
@@ -33,7 +32,6 @@ func (m *PostMeta) normalize() {
 		tags_norm = append(tags_norm, strings.ToLower(tag))
 	}
 
-	log.Println(tags, tags_norm)
 	m.Category = tags_norm
 }
 

@@ -48,7 +48,7 @@
 	gap: 1.5rem;
 	padding: 2rem 1.5rem;
 	justify-content: center;
-	align-content: space-around;
+	align-content: start;
 	box-sizing: border-box;
 }
 

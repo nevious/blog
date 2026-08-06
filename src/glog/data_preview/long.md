@@ -3,7 +3,8 @@ title: This is a long post
 author: Nevi
 date: 2026-01-29
 slug: long-post
-category: dummy
+category:
+  - dummy
 ---
 
 # Code!

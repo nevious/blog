@@ -20,6 +20,7 @@ func initConfig() {
 	 * backend-1  | [GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
 	 * backend-1  |  - using env:	export GIN_MODE=release
 	 * backend-1  |  - using code:	gin.SetMode(gin.ReleaseMode)
+	 * Using both for now, GIN_MODE for GIN internals, MODE for my own config
 	 */
 	configFile, ok := os.LookupEnv("MODE"); if !ok {
 		configFile = "config"

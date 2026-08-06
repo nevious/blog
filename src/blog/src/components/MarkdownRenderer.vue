@@ -34,6 +34,11 @@
 </script>
 
 <style scoped>
+.markdown-rendered {
+	font-size: var(--text-base);
+	line-height: 1.75;
+}
+
 :deep(blockquote) {
 	background-color: var(--secondary-accent-color-25);
 	padding: 1rem;

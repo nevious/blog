@@ -31,7 +31,6 @@
 	let results = ref(null)
 
 	function clickOutsideSearchBar(event) {
-
 		if (!searchInput.value?.contains(event.target)) {
 			results.value = null
 			searchInput.value = null
@@ -72,7 +71,7 @@
 		left: 1px;
 		right: 1px;
 		z-index: 10;    /* ensure it's above other content */
-		background: var(--primary-accent-color-50);
+		background: var(--primary-accent-color-95);
 		border-radius: 0 0 var(--border-radius) var(--border-radius);
 		margin-top: -1px;
 		color: black;
@@ -92,7 +91,7 @@
 	}
 
 	.result li:hover {
-		background: var(--primary-accent-color-95);
+		background: var(--secondary-accent-color-50);
 	}
 
 	.result h4 {

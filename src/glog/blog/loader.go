@@ -19,9 +19,22 @@ type PostMeta struct {
 	Date time.Time `yaml:"date" json:"date"`
 	Slug string `yaml:"slug" json:"slug"`
 	Author string `yaml:"author" json:"author"`
-	Category string `yaml:"category" json:"category"`
+	Category []string `yaml:"category" json:"category"`
 	Description string `yaml:"description" json:"description"`
 	Splash string `yaml:"splash" json:"splash"`
+}
+
+func (m *PostMeta) normalize() {
+	log.Println("HELLO NORM")
+	tags := m.Category
+	var tags_norm []string
+
+	for _, tag := range tags {
+		tags_norm = append(tags_norm, strings.ToLower(tag))
+	}
+
+	log.Println(tags, tags_norm)
+	m.Category = tags_norm
 }
 
 type Post struct {
@@ -58,11 +71,13 @@ func loadPosts() (map[string]*Post, error) {
 	buffer_posts := map[string]*Post{}
 	for _, f := range files {
 		p, err := loadPostFromFile(f)
-		if err != nil { return nil, err }
+		if err != nil {
+			log.Printf("Error on %s", f)
+			return nil, err
+		}
 
 		buffer_posts[p.Meta.Slug] = p
 	}
-
 
 	return buffer_posts, nil
 }
@@ -76,7 +91,8 @@ func loadPostFromFile(path string) (*Post, error) {
 	var meta PostMeta
 	content, err := frontmatter.Parse(f, &meta)
 	if err != nil { return nil, err }
-
+	
+	meta.normalize()
 	return &Post{Meta: meta, Content: string(content)}, nil
 }
 

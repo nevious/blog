@@ -3,7 +3,8 @@ title: Second
 author: Nevi
 date: 2025-01-29
 slug: second
-category: dummy
+category:
+  - dummy
 ---
 
 # Hello

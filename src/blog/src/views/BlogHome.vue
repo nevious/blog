@@ -1,9 +1,10 @@
 <template>
-	<div v-if="posts?.length > 0 || featuredPost !== 'undefined'" class="blog-container">
+	<div v-if="posts?.length > 0 || featuredPost != null" class="blog-container">
 		<router-link v-if="featuredPost" class="blog-item feature" :to="`/posts/${featuredPost.slug}`">
 			<Card :title="featuredPost.title"
 				:description="featuredPost.description"
-				:background="featuredPost.splash ? `url(${featuredPost.splash})` : undefined" />
+				:background="featuredPost.splash ? `url(${featuredPost.splash})` : undefined"
+				:featured="true" />
 		</router-link>
 
 		<router-link class="blog-item" v-for="post in posts" :key="post.slug" :to="`/posts/${post.slug}`">
@@ -40,13 +41,14 @@
 
 .blog-container {
 	flex-grow: 1;
-	width: clamp(180px, 100%, 900px);
+	width: clamp(180px, 100%, 1100px);
 	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 2rem;
-	padding: 2rem;
+	gap: 1.5rem;
+	padding: 2rem 1.5rem;
 	justify-content: center;
+	align-content: space-around;
 	box-sizing: border-box;
 }
 
@@ -54,8 +56,7 @@
 	flex: 1 1 calc(33.333% - 2rem);
 	flex-wrap: wrap;
 	box-sizing: border-box;
-	box-shadow: 0 0 0 1.2px var(--primary-accent-color);
-	border-radius: var(--border-radius);
+	box-shadow: 0 0 0 0px var(--primary-accent-color);
 	max-height: 250px;
 	transition: transform 0.2s;
 	overflow: hidden;
@@ -67,7 +68,7 @@
 }
 
 .blog-item:hover {
-	transform: rotate(1deg) scale(1.02) ;
+	transform: scale(1.02) ;
 }
 
 a,
@@ -81,8 +82,8 @@ a:active {
 
 .feature {
 	flex: 0 0 100%;
-	height: 350px;
-	max-height: 350px;
+	height: 500px;
+	max-height: 500px;
 	box-sizing: border-box;
 }
 

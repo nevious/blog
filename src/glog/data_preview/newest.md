@@ -3,7 +3,8 @@ title: Newest thing!
 author: me
 date: 2026-02-7
 slug: test-with-description
-category: "Dummy"
+category:
+  - Dummy
 description: "This is just a test with a different description than the one defined in the frontend. It's also longer!"
 splash: "https://next.nevious.ch/s/f4rBCmcpbmELPtj/download"
 ---

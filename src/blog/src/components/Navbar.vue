@@ -8,9 +8,9 @@
 			<Button title="Categories" />
 		</router-link> -->
 
-		<router-link class="grow" to="">
+		<div class="grow">
 			<SearchBar />
-		</router-link>
+		</div>
 
 		<router-link to="/about">
 			<Button title="About" />

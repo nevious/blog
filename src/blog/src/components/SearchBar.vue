@@ -23,7 +23,6 @@
 <script setup>
 	import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 	import { usePostStore } from '@/stores/glogPost'
-	import Card from '@/components/Card.vue'
 
 	const postStore = usePostStore()
 	const searchInput = ref(null)

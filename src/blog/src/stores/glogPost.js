@@ -5,7 +5,8 @@ import { fetchPosts, fetchPostBySlug } from '@/api/glogPosts'
 export const usePostStore = defineStore('glogStore', () => {
 	const posts = ref([])
 	const currentPost = ref(null)
-	let error = ref(null)
+	const error = ref(null)
+	const isLoading = ref(false)
 
 	function getPostIndex() {
 		return posts.value.findIndex(post => post.slug == currentPost.value.meta.slug)
@@ -16,7 +17,7 @@ export const usePostStore = defineStore('glogStore', () => {
 		if ( index >= 0 && index < posts.value.length - 1){
 			return posts.value.at(index+1)
 		}
-		return posts.value.at(0)
+		return null
 	}
 
 	function getPreviousPost(){
@@ -24,22 +25,30 @@ export const usePostStore = defineStore('glogStore', () => {
 		if ( index > 0 ) {
 			return posts.value.at(index-1)
 		}
-		return posts.value.at(-1)
+		return null
 	}
 
 	async function loadPosts() {
+		error.value = null
+		isLoading.value = true
 		try {
 			posts.value = await fetchPosts()
 		} catch (err) {
-			error = err
+			error.value = err
+		} finally {
+			isLoading.value = false
 		}
 	}
 
 	async function loadPostBySlug(slug) {
+		error.value = null
+		isLoading.value = true
 		try {
 			currentPost.value = await fetchPostBySlug(slug)
 		} catch (err) {
-			error = err
+			error.value = err
+		} finally {
+			isLoading.value = false
 		}
 	}
 
@@ -49,6 +58,8 @@ export const usePostStore = defineStore('glogStore', () => {
 		loadPosts,
 		loadPostBySlug,
 		getNextPost,
-		getPreviousPost
+		getPreviousPost,
+		error,
+		isLoading
 	}
 })

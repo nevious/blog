@@ -1,16 +1,17 @@
 <template>
 	<nav class="postPagerNav">
-		<router-link v-if="previousPost" :to="`/posts/${previousPost.slug}`" class="pager-link pager-prev">
-			<span class="pager-label">← Previous</span>
-			<span class="pager-title">{{ previousPost.title }}</span>
+		<router-link v-if="olderPost" :to="`/posts/${olderPost.slug}`" class="pager-link pager-prev">
+			<span class="pager-label">← Previous </span>
+			<span class="pager-title">{{ olderPost.title }}</span>
 		</router-link>
 		<span v-else class="pager-placeholder" />
 
-		<router-link v-if="nextPost" :to="`/posts/${nextPost.slug}`" class="pager-link pager-next">
+		<router-link v-if="newerPost" :to="`/posts/${newerPost.slug}`" class="pager-link pager-next">
 			<span class="pager-label">Next →</span>
-			<span class="pager-title">{{ nextPost.title }}</span>
+			<span class="pager-title">{{ newerPost.title }}</span>
 		</router-link>
 		<span v-else class="pager-placeholder" />
+
 	</nav>
 </template>
 
@@ -20,8 +21,10 @@
 
 	const postStore = usePostStore()
 
-	const nextPost = computed(() => postStore.getNextPost())
-	const previousPost = computed(() => postStore.getPreviousPost())
+	// Post order from backend is newer to older
+	// hence older posts are next
+	const olderPost = computed(() => postStore.getNextPost())
+	const newerPost = computed(() => postStore.getPreviousPost())
 </script>
 
 <style scoped>
@@ -39,8 +42,8 @@
 	flex-direction: column;
 	gap: 0.25rem;
 	text-decoration: none;
-	color: var(--primary-accent-color);
 	max-width: 45%;
+	color: var(--primary-font-color);
 	transition: color 0.2s;
 }
 

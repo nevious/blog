@@ -6,8 +6,9 @@ import (
 )
 
 func CorsMiddleWare() gin.HandlerFunc {
-	viper.SetDefault("headers.allow_origin", "localhost")
+	viper.SetDefault("headers.allow_origin", "http://localhost")
 	allowedOrigin := viper.GetString("headers.allow_origin")
+
 
 	// IIGC; this function is called on every request
 	// therefore it makes sense to do config stuff before and not directly inside
@@ -15,5 +16,10 @@ func CorsMiddleWare() gin.HandlerFunc {
 		c.Writer.Header().Set(
 			"Access-Control-Allow-Origin", allowedOrigin,
 		)
+		c.Writer.Header().Set(
+			"Access-Control-Allow-Methods", "GET",
+		)
+
+		c.Next()
 	}
 }

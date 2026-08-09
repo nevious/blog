@@ -9,6 +9,4 @@ func RegisterRoutes(r *gin.Engine ) {
 	r.GET("/echo/:slug", Echo)
 	r.GET("/posts", GetPosts)
 	r.GET("/posts/:slug", GetPostBySlug)
-	r.GET("/reload", ReloadPosts)
 }
-

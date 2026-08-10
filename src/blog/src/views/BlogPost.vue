@@ -103,8 +103,22 @@
 		font-size: var(--text-sm);
 	}
 
+	:deep(.markdown-rendered a) {
+		text-decoration: none;
+		color: var(--secondary-accent-color-75);
+	}
+
+	:deep(.markdown-rendered a:hover) {
+		text-decoration: none;
+		color: var(--ternary-accent-color-75);
+	}
+
 	:deep(.markdown-rendered img) {
 		width: clamp(250px, 100%, 900px);
 		height: auto;
+	}
+
+	:deep(.markdown-rendered li) {
+		list-style-type: " ";
 	}
 </style>

@@ -119,6 +119,7 @@
 	}
 
 	:deep(.markdown-rendered li) {
-		list-style-type: " ";
+		list-style-type: "🔻 ";
+		font-family: "Noto Emoji", "Noto Sans", sans-serif
 	}
 </style>

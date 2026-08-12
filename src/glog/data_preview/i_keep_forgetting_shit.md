@@ -3,6 +3,8 @@ title: I keep forgetting sh!t
 date: 2026-08-09
 author: Nevi
 slug: i-keep-forgetting-shit
+description: |
+    Building a strategy to avoid being bored when time is available for doing things that are enjoyable
 category:
   - life
   - how2adult

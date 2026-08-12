@@ -120,6 +120,9 @@
 
 	:deep(.markdown-rendered li) {
 		list-style-type: "🔻 ";
-		font-family: "Noto Emoji", "Noto Sans", sans-serif
 	}
+
+	:deep(.markdown-rendered ul li::marker) {
+		 font-family: "Noto Emoji", sans-serif;
+	 }
 </style>

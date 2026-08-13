@@ -1,32 +1,37 @@
 <template>
-	<div v-if="post" class="blog-post">
-		<h1 class="post-title">{{ post.meta.title }}</h1>
+	<div v-if="postStore.isLoading" class="blog-post">
+		<Loader class="fallback-block" />
+	</div>
+
+	<div v-else-if="postStore.error" class="blog-post">
+		<Error title='Oops!' :message="postStore.error.message" />
+	</div>
+
+	<div v-else-if="postStore.currentPost" class="blog-post">
+		<h1 class="post-title">{{ postStore.currentPost.meta.title }}</h1>
 
 		<div class="frontmatter">
-			<span v-if="post.meta.date"><b>On</b> {{ dateFormatter(post.meta.date) }}</span>
-			<span v-if="post.meta.author"><b>by</b> {{ post.meta.author }}</span>
-			<span v-if="post.meta.category"><b>in</b></span>
+			<span v-if="postStore.currentPost.meta.date"><b>On</b> {{ dateFormatter(postStore.currentPost.meta.date) }}</span>
+			<span v-if="postStore.currentPost.meta.author"><b>by</b> {{ postStore.currentPost.meta.author }}</span>
+			<span v-if="postStore.currentPost.meta.category"><b>in</b></span>
 			<div class="category-span">
-				<span v-for="category in post.meta.category" class="category-tag">{{category}}</span>
+				<span v-for="category in postStore.currentPost.meta.category" class="category-tag">{{category}}</span>
 			</div>
 		</div>
 
-		<MarkdownRenderer :content="post.content" />
+		<MarkdownRenderer :content="postStore.currentPost.content" />
 		<PostPager />
 	</div>
-
-	<div v-else class="blog-post">
-		<p>Wrong turn at Albuquerque... mayb go <router-link to="/">back...</router-link></p>
-	</div>
-
 </template>
 
 <script setup>
 	import { onMounted, watch, computed } from 'vue'
 	import { usePostStore } from '@/stores/glogPost'
 	import { useRoute } from 'vue-router'
-	import MarkdownRenderer from '../components/MarkdownRenderer.vue'
-	import PostPager from '../components/PostPager.vue'
+	import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
+	import PostPager from '@/components/PostPager.vue'
+	import Error from '@/components/Error.vue'
+	import Loader from '@/components/Loader.vue'
 
 	// Get store and route
 	const postStore = usePostStore()
@@ -43,19 +48,16 @@
 		if (postStore.posts.length == 0) {
 			await postStore.loadPosts()
 		}
-		postStore.loadPostBySlug(route.params.slug)
+		await postStore.loadPostBySlug(route.params.slug)
 	})
 
 	// Re-fetch if the route changes
 	watch(
 		() => route.params.slug,
-		(newSlug, oldSlug) => {
-			postStore.loadPostBySlug(newSlug)
+		async (newSlug, oldSlug) => {
+			await postStore.loadPostBySlug(newSlug)
 		}
 	)
-
-	// Reactive reference to current post
-	const post = computed(() => postStore.currentPost)
 </script>
 
 <style scoped>
@@ -73,7 +75,6 @@
 
 	.post-title {
 		font-size: var(--text-2xl);
-		color: var(--primary-accent-color);
 		margin: 0 0 0.5rem 0;
 		line-height: 1.2;
 	}
@@ -105,12 +106,12 @@
 
 	:deep(.markdown-rendered a) {
 		text-decoration: none;
-		color: var(--secondary-accent-color-75);
+		color: var(--ternary-accent-color);
 	}
 
 	:deep(.markdown-rendered a:hover) {
 		text-decoration: none;
-		color: var(--ternary-accent-color-75);
+		color: var(--ternary-accent-color-50);
 	}
 
 	:deep(.markdown-rendered img) {

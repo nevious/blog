@@ -7,14 +7,17 @@
 			<h1>{{ pageSettings.title }}</h1>
 		</div>
 		<Navbar />
-	</div>
+		<span v-if="theme.activeTheme.value === 'light'" @click="theme.toggleTheme()">💡</span>
+		<span v-else @click="theme.toggleTheme()">🔦</span> </div>
 </template>
 
 <script setup>
 	import Navbar from '@/components/Navbar.vue'
 	import { config } from '@/config/config'
-	import { computed } from 'vue'
+	import { computed, inject } from 'vue'
 	const pageSettings = computed(() => config.site )
+
+	const theme = inject('theme')
 </script>
 
 <style scoped>
@@ -26,6 +29,7 @@
 		justify-content: space-between;
 		padding: 0.5rem 1rem;
 		background-color: var(--primary-accent-color);
+		color: var(--logo-color)
 	}
 
 	.logo {
@@ -51,6 +55,5 @@
 
 	.logo h1 {
 		margin: 0;
-		color: var(--logo-color);
 	}
 </style>

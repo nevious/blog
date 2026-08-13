@@ -3,7 +3,6 @@ package blog
 import (
 	"os";
 	"strings"
-	"sync"
 	"path/filepath"
 	"io/fs"
 	"log"
@@ -42,7 +41,6 @@ type Post struct {
 
 var (
 	posts = map[string]*Post{}
-	postMu sync.RWMutex
 )
 
 func loadPosts() (map[string]*Post, error) {
@@ -95,9 +93,6 @@ func loadPostFromFile(path string) (*Post, error) {
 }
 
 func GetAllPostsMeta() []PostMeta {
-	postMu.Lock()
-	defer postMu.Unlock()
-
 	list := make([]PostMeta, 0, len(posts))
 	for _, p := range posts {
 		list = append(list, p.Meta)
@@ -107,9 +102,6 @@ func GetAllPostsMeta() []PostMeta {
 }
 
 func GetPost(slug string) *Post {
-	postMu.RLock()
-	defer postMu.RUnlock()
-
 	if p, ok := posts[slug]; ok {
 		return p
 	}
@@ -118,9 +110,6 @@ func GetPost(slug string) *Post {
 }
 
 func ReloadLoad() {
-	postMu.Lock()
-	defer postMu.Unlock()
-
 	buffer, err := loadPosts()
 	if err != nil {
 		log.Printf("Error encountered when loading posts, not replacing existing")

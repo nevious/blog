@@ -1,9 +1,4 @@
 :root {
-	/* Design Colors */
-	--primary-body-color: oklch(0.9407 0.002 247.839);
-	--logo-color: oklch(0.9407 0.002 247.839);
-	--default-splash-color: oklch(0.6533 0.18 210.71);
-
 	/* Accents and colors — bolder chroma for a more distinctive palette */
 	--primary-accent-color: oklch(0.21 0.05 254);
 	--primary-accent-color-25: oklch(0.21 0.05 254 / 0.25);
@@ -23,11 +18,11 @@
 	--ternary-accent-color-75: oklch(0.55 0.14 244 / 0.75);
 	--ternary-accent-color-95: oklch(0.55 0.14 244 / 0.95);
 
-	/* Font colors */
-	--primary-font-color: oklch(98.4% 0.019 200.873);
-	--muted-font-color: oklch(0.55 0.04 254);
+	--logo-color: oklch(0.9407 0.002 247.839);
+	--default-splash-color: oklch(0.6533 0.18 210.71);
 
 	/* Typography scale */
+	--text-xsm: 0.75rem;
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
 	--text-lg: 1.125rem;
@@ -40,11 +35,34 @@
 	--border-radius: 1px;
 }
 
+:root.light {
+	/* Design Colors */
+	--primary-body-color: oklch(0.9407 0.002 247.839);
+	--secondary-body-color: oklch(1 0 0);
+
+	/* Font colors */
+	--primary-font-color: oklch(0.087 0.014 194.76);
+	--muted-font-color: oklch(0.55 0.04 254);
+
+	color: var(--primary-font-color);
+}
+
+:root.dark {
+	--primary-body-color: oklch(0.3 0.01 285);
+	--secondary-body-color: oklch(0.35 0.01 285);
+
+	/* Font colors */
+	--primary-font-color: oklch(0.85 0 0);
+	--muted-font-color: oklch(0.8 0.04 253);
+
+	color: var(--primary-font-color);
+}
+
 body {
   /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Open Sans", sans-serif;*/
   font-family: "Noto Sans", sans-serif;
   margin: 0;
-  background-color: var(--primary-body-color);
+  background-color: var(--primary-body-color)
 }
 
 .isolate {
@@ -64,4 +82,8 @@ a:active {
 
 li {
 	list-style-type: none;
+}
+
+.fallback-block {
+	margin:auto;
 }

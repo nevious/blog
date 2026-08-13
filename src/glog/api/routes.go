@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	"glog/mdw"
 )
 
 func RegisterRoutes(r *gin.Engine ) {
@@ -9,4 +10,5 @@ func RegisterRoutes(r *gin.Engine ) {
 	r.GET("/echo/:slug", Echo)
 	r.GET("/posts", GetPosts)
 	r.GET("/posts/:slug", GetPostBySlug)
+	r.OPTIONS("/*default", middleware.CorsMiddleWare())
 }

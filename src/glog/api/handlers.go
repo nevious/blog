@@ -39,8 +39,3 @@ func GetPostBySlug(c *gin.Context) {
 
 	c.JSON(http.StatusOK, post)
 }
-
-func ReloadPosts(c *gin.Context) {
-	blog.ReloadLoad()
-	c.Status(http.StatusAccepted)
-}

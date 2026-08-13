@@ -14,11 +14,14 @@
 
 	watch(renderedContent, async () => {
 		await nextTick()
+
+		// Safety rail in case container has not yet been populated
+		// Due to immediate: true, the below code may run before the
+		// content is available
+		if (!container.value) return
+
 		container.value.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block))
-		// understanding:
-		// passing { immediate: true} forces the watcher to "fire" essentially like "onMounted()"
-		// replacing this watcher with onMounted however doesn't work as the component HAS been mounted
-		// but the v-html portion might still be loading
+
 		container.value.querySelectorAll('img').forEach( image => {
 			image.style.filter = 'blur(10px)'
 			image.style.opacity = '0'
@@ -34,14 +37,37 @@
 </script>
 
 <style scoped>
-.markdown-rendered {
-	font-size: var(--text-base);
-	line-height: 1.75;
-}
+	.markdown-rendered {
+		font-size: var(--text-base);
+		line-height: 1.75;
+	}
 
-:deep(blockquote) {
-	background-color: var(--secondary-accent-color-25);
-	padding: 1rem;
-	border-left: 4px solid var(--primary-accent-color);
-}
+	:deep(blockquote) {
+		background-color: var(--secondary-accent-color-25);
+		padding: 1rem;
+		border-left: 4px solid var(--primary-accent-color);
+	}
+
+	:deep(.markdown-rendered a) {
+		text-decoration: none;
+		color: var(--ternary-accent-color);
+	}
+
+	:deep(.markdown-rendered a:hover) {
+		text-decoration: none;
+		color: var(--ternary-accent-color-50);
+	}
+
+	:deep(.markdown-rendered img) {
+		width: clamp(250px, 100%, 900px);
+		height: auto;
+	}
+
+	:deep(.markdown-rendered li) {
+		list-style-type: "🔻 ";
+	}
+
+	:deep(.markdown-rendered ul li::marker) {
+		 font-family: "Noto Emoji", sans-serif;
+	 }
 </style>

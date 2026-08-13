@@ -7,17 +7,14 @@
 			<h1>{{ pageSettings.title }}</h1>
 		</div>
 		<Navbar />
-		<span v-if="theme.activeTheme.value === 'light'" @click="theme.toggleTheme()">💡</span>
-		<span v-else @click="theme.toggleTheme()">🔦</span> </div>
+	</div>
 </template>
 
 <script setup>
 	import Navbar from '@/components/Navbar.vue'
 	import { config } from '@/config/config'
-	import { computed, inject } from 'vue'
+	import { computed } from 'vue'
 	const pageSettings = computed(() => config.site )
-
-	const theme = inject('theme')
 </script>
 
 <style scoped>

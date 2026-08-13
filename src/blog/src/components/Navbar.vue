@@ -15,12 +15,17 @@
 		<router-link to="/about">
 			<Button title="About" />
 		</router-link>
+
+		<span class="pad" v-if="theme.activeTheme.value === 'light'" @click="theme.toggleTheme()">💡</span>
+		<span class="pad" v-else @click="theme.toggleTheme()">🔦</span>
 	</nav>
 </template>
 
 <script setup>
 	import Button from './Button.vue'
 	import SearchBar from './SearchBar.vue'
+	import { inject } from 'vue'
+	const theme = inject('theme')
 </script>
 
 <style scoped>
@@ -42,6 +47,11 @@
 
 	.grow {
 		flex-grow: 1;
+	}
+
+	.pad {
+		padding-left: 0.25rem;
+		padding-right: 0.25rem;
 	}
 </style>
 

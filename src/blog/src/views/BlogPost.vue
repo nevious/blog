@@ -85,7 +85,7 @@
 		align-items: center;
 		flex-wrap: wrap;
 		font-size: var(--text-sm);
-		color: var(--muted-font-color);
+		color: var(--primary-font-color);
 		margin-bottom: 2rem;
 		padding-bottom: 0.75rem;
 		border-bottom: 1px solid var(--primary-accent-color-25);
@@ -98,7 +98,6 @@
 
 	.category-tag {
 		background: var(--secondary-accent-color-25);
-		color: var(--primary-accent-color);
 		padding: 0.15rem 0.6rem;
 		border-radius: 999px;
 		font-size: var(--text-sm);

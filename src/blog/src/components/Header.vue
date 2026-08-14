@@ -18,7 +18,6 @@
 </script>
 
 <style scoped>
-
 	.pageNav {
 		display: flex;
 		flex-wrap: wrap;

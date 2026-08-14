@@ -8,6 +8,13 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>N E V I</title>
+	<script>
+		(function() {
+			// avoid FOUC
+			const theme = localStorage.getItem('theme') || 'light'
+			document.documentElement.classList.add(theme)
+		})()
+	</script>
   </head>
   <body>
     <div id="app" class="isolate"></div>

@@ -16,8 +16,8 @@
 			<Button title="About" />
 		</router-link>
 
-		<span class="pad" v-if="theme.activeTheme.value === 'light'" @click="theme.toggleTheme()">💡</span>
-		<span class="pad" v-else @click="theme.toggleTheme()">🔦</span>
+		<span class="toggle" v-if="theme.activeTheme.value === 'light'" @click="theme.toggleTheme()">💡</span>
+		<span class="toggle" v-else @click="theme.toggleTheme()">🔦</span>
 	</nav>
 </template>
 
@@ -49,7 +49,8 @@
 		flex-grow: 1;
 	}
 
-	.pad {
+	.toggle {
+		cursor: pointer;
 		padding-left: 0.25rem;
 		padding-right: 0.25rem;
 	}

@@ -11,9 +11,11 @@
 	}
 
 	watchEffect(() => {
-		document.documentElement.className = activeTheme.value
+		document.documentElement.classList.remove('light', 'dark')
+		document.documentElement.classList.add(activeTheme.value)
 		localStorage.setItem('theme', activeTheme.value)
 	})
+
 </script>
 
 <template>

@@ -2,9 +2,9 @@
 	<div class="pageNav">
 		<div class="logo">
 			<div class="logo-svg">
-				<img :src="pageSettings.logo" :alt="pageSettings.description" />
+				<img :src="siteStore.logo" :alt="siteStore.description" />
 			</div>
-			<h1>{{ pageSettings.title }}</h1>
+			<h1>{{ siteStore.siteTitle }}</h1>
 		</div>
 		<Navbar />
 	</div>
@@ -12,9 +12,8 @@
 
 <script setup>
 	import Navbar from '@/components/Navbar.vue'
-	import { config } from '@/config/config'
-	import { computed } from 'vue'
-	const pageSettings = computed(() => config.site )
+	import { useSiteStore } from '@/stores/site'
+	const siteStore = useSiteStore()
 </script>
 
 <style scoped>

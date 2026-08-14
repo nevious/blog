@@ -15,6 +15,12 @@
 			document.documentElement.classList.add(theme)
 		})()
 	</script>
+	<!-- Critical CSS -->
+	<style>
+		:root.light { --primary-body-color: oklch(0.9407 0.002 247.839); }
+		:root.dark  { --primary-body-color: oklch(0.3 0.01 285); }
+		body { background-color: var(--primary-body-color); }
+	</style>
   </head>
   <body>
     <div id="app" class="isolate"></div>

@@ -4,10 +4,6 @@
 			<Button title="Home" />
 		</router-link>
 
-		<!-- <router-link to="/">
-			<Button title="Categories" />
-		</router-link> -->
-
 		<div class="grow">
 			<SearchBar />
 		</div>
@@ -16,8 +12,8 @@
 			<Button title="About" />
 		</router-link>
 
-		<span class="toggle" v-if="theme.activeTheme.value === 'light'" @click="theme.toggleTheme()">💡</span>
-		<span class="toggle" v-else @click="theme.toggleTheme()">🔦</span>
+		<span class="toggle" v-if="activeTheme === 'light'" @click="toggleTheme">💡</span>
+		<span class="toggle" v-else @click="toggleTheme">🔦</span>
 	</nav>
 </template>
 
@@ -25,7 +21,7 @@
 	import Button from './Button.vue'
 	import SearchBar from './SearchBar.vue'
 	import { inject } from 'vue'
-	const theme = inject('theme')
+	const {activeTheme, toggleTheme} = inject('theme')
 </script>
 
 <style scoped>

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Design Tokens inspired by the Blog */
+:root {
+  --primary-bg: oklch(0.94 0.01 254);
+  --accent-indigo: oklch(0.45 0.19 277); /* A modern indigo */
+
+  font-family: "Noto Sans", system-ui, -apple-system, sans-serif;
+  background-color: var(--primary-bg);
+  color: oklch(0.25 0.02 254);
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom transitions for a polished feel */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}

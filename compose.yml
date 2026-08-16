@@ -21,3 +21,23 @@ services:
       - ./src/glog:/src
     ports:
       - 8080:8080
+  img-snap-api:
+    image: img-snap
+    build:
+      context: .
+      dockerfile: ./docker/img-snap-api/Dockerfile
+    ports:
+      - 12000:443
+    volumes:
+      - ./src/img-snap-api:/app/
+    tty: true
+  img-snap-ui:
+    env_file: "./src/img-snap-ui/.env"
+    image: img-snap-ui
+    build:
+      context: .
+      dockerfile: ./docker/img-snap-ui/Dockerfile
+    ports:
+      - 5174:5174
+    volumes:
+      - ./src/img-snap-ui:/app

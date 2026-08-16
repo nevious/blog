@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../vendor/symfony/routing/Loader/schema/routing.schema.json
+
+# This file is the entry point to configure the routes of your app.
+# Methods with the #[Route] attribute are automatically imported.
+# See also https://symfony.com/doc/current/routing.html
+
+# To list all registered routes, run the following command:
+#   bin/console debug:router
+
+controllers:
+    resource: routing.controllers
+
+hello_json_world:
+  path:
+    - /hello/{name}
+  controller: App\Controller\HelloJsonWorldController::index
+  defaults:
+    name: null
+  methods: GET|HEAD
+
+greet_name:
+  path: /greet/{name}
+  controller: App\Controller\HelloJsonWorldController::greet
+  methods: GET|HEAD
+
+greet_new_name:
+  path: /greet/{name}
+  controller: App\Controller\HelloJsonWorldController::post
+  methods: POST
+
+app_image_index:
+    path: /image
+    controller: App\Controller\ImageApiController::index
+    methods: GET
+
+app_image_create:
+    path: /image
+    controller: App\Controller\ImageApiController::create
+    methods: POST
+
+app_image_delete:
+    path: /image/{slug}
+    controller: App\Controller\ImageApiController::delete
+    methods: DELETE
+
+app_store_get:
+    path: /store/{slug}
+    controller: App\Controller\ImageStoreController::fetch
+    methods: GET

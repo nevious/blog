@@ -8,7 +8,7 @@ description: |
 category:
   - life
   - how2adult
-splash: https://placehold.co/1000x400/222327/72ccEB.webp?font=noto-sans&text=@todo
+splash: https://snap.nevious.ch/store/todo-splash
 ---
 
 To avoid having browser tabs open idling away my limited resources and mental space, an improvement on tracking ideas is in order. Key aspects are decoupling from digital devices and locality. In short I want to be able to ensure remembering anything anywhere with little to no effort.

@@ -88,7 +88,6 @@
 		color: var(--primary-font-color);
 		margin-bottom: 2rem;
 		padding-bottom: 0.75rem;
-		border-bottom: 1px solid var(--primary-accent-color-25);
 	}
 
 	.category-span {

@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-	import { onMounted, computed, ref, inject } from 'vue'
+	import { onMounted, computed, ref } from 'vue'
 	import { usePostStore } from '@/stores/glogPost'
 	import Card from '@/components/Card.vue'
 	import Error from '@/components/Error.vue'
@@ -64,9 +64,6 @@
 	function filterCallback(filterList) {
 		activeTags.value = filterList
 	}
-
-	const theme = inject('theme')
-
 </script>
 
 <style scoped>

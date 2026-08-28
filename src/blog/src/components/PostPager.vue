@@ -32,9 +32,9 @@
 .postPagerNav {
 	margin-top: 2.5rem;
 	padding-top: 1.5rem;
-	border-top: 1px solid var(--primary-accent-color-25);
 	display: flex;
 	justify-content: space-between;
+	border-top: 1px solid var(--ternary-accent-color-50);
 	gap: 1rem;
 }
 

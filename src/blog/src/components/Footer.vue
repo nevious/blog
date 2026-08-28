@@ -18,7 +18,7 @@
 .footer {
 	width: 100%;
 	background-color: var(--primary-accent-color);
-	color: var(--primary-font-color);
+	color: var(--logo-color);
 }
 
 .footer-inner {
@@ -43,7 +43,7 @@
 
 .footer-nav a {
 	font-size: var(--text-sm);
-	color: var(--primary-font-color);
+	color: var(--logo-color);
 	text-decoration: none;
 	opacity: 0.85;
 	transition: opacity 0.2s;

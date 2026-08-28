@@ -1,10 +1,10 @@
 :root {
 	/* Accents and colors — bolder chroma for a more distinctive palette */
-	--primary-accent-color: oklch(0.21 0.05 254);
-	--primary-accent-color-25: oklch(0.21 0.05 254 / 0.25);
-	--primary-accent-color-50: oklch(0.21 0.05 254 / 0.50);
-	--primary-accent-color-75: oklch(0.21 0.05 254 / 0.75);
-	--primary-accent-color-95: oklch(0.21 0.05 254 / 0.95);
+	--primary-accent-color: oklch(0.27 0.02 254);
+	--primary-accent-color-25: oklch(0.27 0.02 254 / 0.25);
+	--primary-accent-color-50: oklch(0.27 0.02 254 / 0.50);
+	--primary-accent-color-75: oklch(0.27 0.02 254 / 0.75);
+	--primary-accent-color-95: oklch(0.27 0.02 254 / 0.95);
 
 	--secondary-accent-color: oklch(0.38 0.10 254);
 	--secondary-accent-color-25: oklch(0.38 0.10 254 / 0.25);

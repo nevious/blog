@@ -70,10 +70,9 @@
 		left: 1px;
 		right: 1px;
 		z-index: 10;    /* ensure it's above other content */
-		background: var(--primary-accent-color-95);
+		background: var(--primary-accent-color-75);
 		border-radius: 0 0 var(--border-radius) var(--border-radius);
 		margin-top: -1px;
-		color: black;
 		box-sizing: border-box;
 		font-size: 1rem;
 		opacity: 0.95;
@@ -97,13 +96,11 @@
 		font-size: 1rem;
 		font-weight: 600;
 		margin: 0 0 0.25rem 0;
-		color: var(--primary-body-color);
 	}
 
 	.result p {
 		font-size: 0.875rem;
 		margin: 0;
-		color: var(--primary-body-color, #111);
 		line-height: 1.3;
 	}
 
@@ -115,9 +112,11 @@
 
 	.result a {
 		text-decoration: none;
+		color: inherit;
 	}
 
 	.search {
+        color: var(--logo-color);
 		margin-left: 1rem;
 		margin-right: 1rem;
 		position: relative;
@@ -127,12 +126,11 @@
 	}
 
 	.search input {
-		color: var(--primary-font-color);
+		color: var(--logo-color);
 		width: 100%;
 		border: none;
 		background: transparent;
 		font-size: 1rem;
-
 		outline: none;
 		transition: 
 			background-color 0.2s ease,

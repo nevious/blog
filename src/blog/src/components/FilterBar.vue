@@ -1,5 +1,6 @@
 <script setup>
 	import { ref, inject } from 'vue'
+	import { Tags, OctagonMinus } from '@lucide/vue'
 	const filterList = ref(new Set())
 
 	const props = defineProps({
@@ -25,14 +26,14 @@
 
 <template>
 	<div class="filter-bar">
-		<span class="pad-right filter-icon default-cursor">⌕</span>
+		<span class="pad-right filter-icon default-cursor"><Tags size="18" /></span>
 		<div class="inner-filter">
 			<span class="tag-element pointer"
 				:class="{ active : filterList.has(tag) }"
 				@click="handleClick(tag)"
 				v-for="tag in tags">{{ tag }}</span>
 		</div>
-		<span class="pad-left pointer" @click="resetFilter">✖</span>
+		<span class="pad-left pointer" @click="resetFilter"><OctagonMinus size="18"/></span>
 	</div>
 </template>
 

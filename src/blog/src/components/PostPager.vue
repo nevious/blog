@@ -1,13 +1,13 @@
 <template>
 	<nav class="postPagerNav">
 		<router-link v-if="olderPost" :to="`/posts/${olderPost.slug}`" class="pager-link pager-prev">
-			<span class="pager-label">← Previous </span>
+			<span class="pager-label"><ArrowLeftFromLine /></span>
 			<span class="pager-title">{{ olderPost.title }}</span>
 		</router-link>
 		<span v-else class="pager-placeholder" />
 
 		<router-link v-if="newerPost" :to="`/posts/${newerPost.slug}`" class="pager-link pager-next">
-			<span class="pager-label">Next →</span>
+			<span class="pager-label"><ArrowRightFromLine /></span>
 			<span class="pager-title">{{ newerPost.title }}</span>
 		</router-link>
 		<span v-else class="pager-placeholder" />
@@ -18,6 +18,7 @@
 <script setup>
 	import { computed } from 'vue'
 	import { usePostStore } from '@/stores/glogPost'
+	import { ArrowLeftFromLine, ArrowRightFromLine } from '@lucide/vue'
 
 	const postStore = usePostStore()
 

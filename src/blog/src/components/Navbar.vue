@@ -12,8 +12,8 @@
 			<Button title="About" />
 		</router-link>
 
-		<span class="toggle" v-if="activeTheme === 'light'" @click="toggleTheme">💡</span>
-		<span class="toggle" v-else @click="toggleTheme">🔦</span>
+		<span class="toggle" v-if="activeTheme === 'light'" @click="toggleTheme"><Sun size="20" /></span>
+		<span class="toggle" v-else @click="toggleTheme"><Moon size="20" /></span>
 	</nav>
 </template>
 
@@ -21,6 +21,7 @@
 	import Button from './Button.vue'
 	import SearchBar from './SearchBar.vue'
 	import { inject } from 'vue'
+	import { Sun, Moon } from '@lucide/vue'
 	const {activeTheme, toggleTheme} = inject('theme')
 </script>
 

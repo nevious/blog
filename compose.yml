@@ -15,6 +15,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/backend/Dockerfile
+    env_file: "./src/glog/local/.env.dev"
     environment:
       MODE: development
     volumes:

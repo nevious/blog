@@ -1,6 +1,16 @@
 [service]
 port = 8080
-data_dir = "./data_preview/"
+data_dir = "./data/"
+ignore_files = [
+	"README.md"
+]
 
 [headers]
 allow_origin = "http://localhost:5173"
+
+[env]
+hint = "testing/development"
+
+[repository]
+url = "https://github.com/nevious/blog_posts"
+branch = "main"

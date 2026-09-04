@@ -7,7 +7,7 @@ tmp_dir = "tmp"
 
 [build]
   args_bin = []
-  bin = "./tmp/main"
+  bin = "./tmp/main --configDir ./etc"
   cmd = "go build -o ./tmp/main ."
   delay = 1000
   entrypoint = ["./tmp/main"]

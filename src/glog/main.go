@@ -1,45 +1,37 @@
 package main
 
 import (
-	"os"
-	"fmt"
+	"flag"
 
-	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
-
+	"glog/config"
 	"glog/api"
 	"glog/blog"
 	"glog/mdw"
+	"glog/sources"
+	"glog/jobs"
+
+	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
-// Avoid using init(), apparently it's dragons territory.
-func initConfig() {
-	configFile, ok := os.LookupEnv("MODE"); if !ok {
-		configFile = "config"
-	}
-
-	viper.SetConfigName(configFile)
-	viper.AddConfigPath("./etc/")
-	viper.AddConfigPath(".")
-	viper.SetConfigType("toml")
-
-	err := viper.ReadInConfig()
-	if err != nil {
-		panic(fmt.Sprintf("Error loading config: %v", err))
-	}
-	
-	// Apply enviornment defaults. Gin's default router
-	// accepts to port only through environment variables
-	viper.SetDefault("service.port", 8080)
-	os.Setenv("PORT", viper.GetString("service.port"))
-}
-
 func main() {
-	initConfig()
-	blog.ReloadLoad()
+	configDir := flag.String("configDir", "./etc/", "The configuration directory to look in")
+	flag.Parse()
+	config.Load(*configDir)
+
+	ds :=  sources.NewGitDataSource(
+		viper.GetString("service.data_dir"),
+		viper.GetString("repository.url"),
+		viper.GetString("repository.branch"),
+	)
+
+	blog_store := blog.NewPostStore(ds)
+	queue := jobs.NewJobQueue(blog_store)
+	queue.TriggerReload()
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
-	router.Use(middleware.CorsMiddleWare())
-	api.RegisterRoutes(router)
+	router.Use(mdw.CorsMdw())
+	api.RegisterRoutes(router, blog_store, queue)
+
 	router.Run()
 }

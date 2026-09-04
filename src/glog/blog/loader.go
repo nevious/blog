@@ -1,84 +1,11 @@
 package blog
 
 import (
-	"os";
-	"strings"
-	"path/filepath"
-	"io/fs"
-	"log"
-	"time"
-
+	"os"
 	"github.com/adrg/frontmatter"
-	"github.com/spf13/viper"
-
 )
 
-type PostMeta struct {
-	Title string `yaml:"title" json:"title"`
-	Date time.Time `yaml:"date" json:"date"`
-	Slug string `yaml:"slug" json:"slug"`
-	Author string `yaml:"author" json:"author"`
-	Category []string `yaml:"category" json:"category"`
-	Description string `yaml:"description" json:"description"`
-	Splash string `yaml:"splash" json:"splash"`
-}
-
-func (m *PostMeta) normalize() {
-	tags := m.Category
-	var tags_norm []string
-
-	for _, tag := range tags {
-		tags_norm = append(tags_norm, strings.ToLower(tag))
-	}
-
-	m.Category = tags_norm
-}
-
-type Post struct {
-	Meta PostMeta `json:"meta"`
-	Content string `json:"content"`
-}
-
-var (
-	posts = map[string]*Post{}
-)
-
-func loadPosts() (map[string]*Post, error) {
-	viper.SetDefault("service.data_dir", "data")
-	root := viper.GetString("service.data_dir")
-	files := []string{}
-
-	err := filepath.WalkDir(root, func(p string, d fs.DirEntry, err error) error {
-		// if we encounter an error, we skip the directory
-		if err != nil {
-			log.Printf("Skipping directory '%s' due to error %v", p, err)
-			return fs.SkipDir
-		}
-
-		if !d.IsDir() && strings.HasSuffix(d.Name(), ".md") {
-			files = append(files, p)
-			log.Printf("Adding file: %v", p)
-		}
-
-		return nil
-	})
-	if err != nil { return nil, err }
-
-	buffer_posts := map[string]*Post{}
-	for _, f := range files {
-		p, err := loadPostFromFile(f)
-		if err != nil {
-			log.Printf("Error on %s", f)
-			return nil, err
-		}
-
-		buffer_posts[p.Meta.Slug] = p
-	}
-
-	return buffer_posts, nil
-}
-
-func loadPostFromFile(path string) (*Post, error) {
+func parseMarkdown(path string) (*Post, error) {
 	f, err := os.Open(path)
 	if err != nil { return nil, err}
 
@@ -92,29 +19,3 @@ func loadPostFromFile(path string) (*Post, error) {
 	return &Post{Meta: meta, Content: string(content)}, nil
 }
 
-func GetAllPostsMeta() []PostMeta {
-	list := make([]PostMeta, 0, len(posts))
-	for _, p := range posts {
-		list = append(list, p.Meta)
-	}
-
-	return list
-}
-
-func GetPost(slug string) *Post {
-	if p, ok := posts[slug]; ok {
-		return p
-	}
-
-	return nil
-}
-
-func ReloadLoad() {
-	buffer, err := loadPosts()
-	if err != nil {
-		log.Printf("Error encountered when loading posts, not replacing existing")
-		log.Printf("Error was: %v", err)
-	} else {
-		posts = buffer
-	}
-}

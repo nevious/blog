@@ -1,6 +1,13 @@
 [service]
 port = 8080
 data_dir = "./data/"
+ignore_files = [
+	"README.md"
+]
 
 [headers]
 allow_origin = "https://nevi-blog.netlify.app"
+
+[repository]
+url = "https://github.com/nevious/blog_posts"
+branch = "main"

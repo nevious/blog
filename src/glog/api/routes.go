@@ -1,14 +1,30 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
 	"glog/mdw"
+	"glog/blog"
+	"glog/jobs"
+
+	"github.com/gin-gonic/gin"
 )
 
-func RegisterRoutes(r *gin.Engine ) {
-	r.GET("/ping", Ping)
-	r.GET("/echo/:slug", Echo)
-	r.GET("/posts", GetPosts)
-	r.GET("/posts/:slug", GetPostBySlug)
-	r.OPTIONS("/*default", middleware.CorsMiddleWare())
+func RegisterRoutes(r *gin.Engine, store *blog.PostStore, queue *jobs.JobQueue) {
+	public := r.Group("/")
+	public.Use(mdw.CorsMdw())
+	handler := NewHandlerContext(store, queue)
+
+	{
+		public.GET("/ping", mdw.InjectMdw(), handler.Ping)
+		public.GET("/echo/:slug", handler.Echo)
+		public.GET("/posts", handler.GetPosts)
+		public.GET("/posts/:slug", handler.GetPostBySlug)
+	}
+
+	private := r.Group("/git")
+	private.Use(mdw.AuthMdw())
+	{
+		private.POST("/reload", handler.HandleReload)
+	}
+
+	r.OPTIONS("/*default", mdw.CorsMdw())
 }

@@ -1,0 +1,602 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>api: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">glog/api/handlers.go (14.3%)</option>
+				
+				<option value="file1">glog/api/routes.go (100.0%)</option>
+				
+				<option value="file2">glog/blog/blog.go (3.3%)</option>
+				
+				<option value="file3">glog/blog/loader.go (0.0%)</option>
+				
+				<option value="file4">glog/blog/types.go (0.0%)</option>
+				
+				<option value="file5">glog/config/config.go (84.6%)</option>
+				
+				<option value="file6">glog/main.go (0.0%)</option>
+				
+				<option value="file7">glog/mdw/auth.go (100.0%)</option>
+				
+				<option value="file8">glog/mdw/cors.go (100.0%)</option>
+				
+				<option value="file9">glog/mdw/inject.go (100.0%)</option>
+				
+				<option value="file10">glog/sources/git.go (82.8%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package api
+
+import (
+        "net/http"
+        "github.com/gin-gonic/gin"
+
+        "glog/blog"
+        "sort"
+)
+
+type HandlerContext struct {
+        store *blog.PostStore
+}
+
+func (h *HandlerContext) Ping(c *gin.Context) <span class="cov8" title="1">{
+        c.JSON(http.StatusOK, gin.H{
+                "message": "pong",
+        })
+}</span>
+
+func (h *HandlerContext) Echo(c *gin.Context) <span class="cov0" title="0">{
+        c.JSON(http.StatusOK, gin.H{
+                "message": c.Param("slug"),
+        })
+}</span>
+
+func (h *HandlerContext) GetPosts(c *gin.Context) <span class="cov0" title="0">{
+        posts := make([]blog.PostMeta, 0, len(h.store.Posts))
+
+        for _, p := range h.store.Posts </span><span class="cov0" title="0">{
+                posts = append(posts, p.Meta)
+        }</span>
+
+        <span class="cov0" title="0">sort.Slice(posts, func(i int, j int) bool </span><span class="cov0" title="0">{
+                return posts[i].Date.After(posts[j].Date)
+        }</span>)
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, posts)</span>
+}
+
+func (h *HandlerContext) GetPostBySlug(c *gin.Context) <span class="cov0" title="0">{
+        slug := c.Param("slug")
+        if post, ok := h.store.Posts[slug]; ok </span><span class="cov0" title="0">{
+                c.JSON(http.StatusOK, post)
+                return
+        }</span>
+        <span class="cov0" title="0">c.JSON(http.StatusNotFound, gin.H{"error": "not found"})</span>
+}
+
+func NewHandlerContext(store *blog.PostStore) *HandlerContext <span class="cov8" title="1">{
+        return &amp;HandlerContext{store}
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package api
+
+import (
+        "net/http"
+
+        "glog/mdw"
+        "glog/blog"
+
+        "github.com/gin-gonic/gin"
+)
+
+func RegisterRoutes(r *gin.Engine, store *blog.PostStore ) <span class="cov8" title="1">{
+        public := r.Group("/")
+        public.Use(mdw.CorsMdw())
+        handler := NewHandlerContext(store)
+
+        </span><span class="cov8" title="1">{
+                public.GET("/ping", mdw.InjectMdw(), handler.Ping)
+                public.GET("/echo/:slug", handler.Echo)
+                public.GET("/posts", handler.GetPosts)
+                public.GET("/posts/:slug", handler.GetPostBySlug)
+        }</span>
+
+        <span class="cov8" title="1">private := r.Group("/git")
+        private.Use(mdw.AuthMdw())
+        </span><span class="cov8" title="1">{
+                private.POST("/reload", func(c *gin.Context) </span><span class="cov8" title="1">{
+                                c.JSON(http.StatusAccepted, gin.H{"message": "not implemented"})
+                        }</span>,
+                )
+        }
+
+        <span class="cov8" title="1">r.OPTIONS("/*default", mdw.CorsMdw())</span>
+}
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package blog
+
+import (
+        "log"
+        "sync"
+        "path/filepath"
+        "io/fs"
+        "strings"
+        "slices"
+
+        "github.com/spf13/viper"
+)
+
+// Quick and dirty!
+func (store *PostStore) isIgnored(filename string) bool <span class="cov0" title="0">{
+        conf := viper.GetStringSlice("service.ignore_files")
+        return slices.Contains(conf, filename)
+}</span>
+
+func (store *PostStore) loadPosts() (map[string]*Post, error) <span class="cov0" title="0">{
+        files := []string{}
+        root := store.Source.DataPath()
+
+        err := filepath.WalkDir(root, func(p string, d fs.DirEntry, err error) error </span><span class="cov0" title="0">{
+                // if we encounter an error, we skip the directory
+                if err != nil </span><span class="cov0" title="0">{
+                        log.Printf("Skipping directory '%s' due to error %v", p, err)
+                        return fs.SkipDir
+                }</span>
+
+                <span class="cov0" title="0">if !d.IsDir() &amp;&amp; strings.HasSuffix(d.Name(), ".md") &amp;&amp; !store.isIgnored(d.Name()) </span><span class="cov0" title="0">{
+                        files = append(files, p)
+                        log.Printf("Adding file: %v", p)
+                }</span>
+
+                <span class="cov0" title="0">return nil</span>
+        })
+
+        <span class="cov0" title="0">if err != nil </span><span class="cov0" title="0">{ return nil, err }</span>
+
+        <span class="cov0" title="0">buffer_posts := map[string]*Post{}
+        for _, f := range files </span><span class="cov0" title="0">{
+                p, err := parseMarkdown(f)
+                if err != nil </span><span class="cov0" title="0">{
+                        log.Printf("Error on %s", f)
+                        return nil, err
+                }</span>
+
+                <span class="cov0" title="0">buffer_posts[p.Meta.Slug] = p</span>
+        }
+
+        <span class="cov0" title="0">return buffer_posts, nil</span>
+}
+
+func (store *PostStore) ReloadLoad() <span class="cov0" title="0">{
+        store.Mu.Lock()
+        defer store.Mu.Unlock()
+
+        buffer, err := store.loadPosts()
+        if err != nil </span><span class="cov0" title="0">{
+                log.Printf("Error encountered when loading posts, not replacing existing")
+                log.Printf("Error was: %v", err)
+        }</span> else<span class="cov0" title="0"> {
+                store.Posts = buffer
+        }</span>
+}
+
+func NewPostStore(ds DataSource) *PostStore <span class="cov8" title="1">{
+        return &amp;PostStore{
+                Source: ds,
+                Posts: nil,
+                Mu: sync.RWMutex{},
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package blog
+
+import (
+        "os"
+        "github.com/adrg/frontmatter"
+)
+
+func parseMarkdown(path string) (*Post, error) <span class="cov0" title="0">{
+        f, err := os.Open(path)
+        if err != nil </span><span class="cov0" title="0">{ return nil, err}</span>
+
+        <span class="cov0" title="0">defer f.Close()
+
+        var meta PostMeta
+        content, err := frontmatter.Parse(f, &amp;meta)
+        if err != nil </span><span class="cov0" title="0">{ return nil, err }</span>
+        
+        <span class="cov0" title="0">meta.normalize()
+        return &amp;Post{Meta: meta, Content: string(content)}, nil</span>
+}
+
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package blog
+
+import (
+        "time"
+        "strings"
+        "sync"
+)
+
+// PostMeta reflects the frontmatter of the markdown file
+type PostMeta struct {
+        Title string `yaml:"title" json:"title"`
+        Date time.Time `yaml:"date" json:"date"`
+        Slug string `yaml:"slug" json:"slug"`
+        Author string `yaml:"author" json:"author"`
+        Category []string `yaml:"category" json:"category"`
+        Description string `yaml:"description" json:"description"`
+        Splash string `yaml:"splash" json:"splash"`
+}
+
+// Normalize a Post's tags to lowercase
+func (m *PostMeta) normalize() <span class="cov0" title="0">{
+        tags := m.Category
+        var tags_norm []string
+
+        for _, tag := range tags </span><span class="cov0" title="0">{
+                tags_norm = append(tags_norm, strings.ToLower(tag))
+        }</span>
+
+        <span class="cov0" title="0">m.Category = tags_norm</span>
+}
+
+
+// Post consists of the Metadata (frontmatter) and the
+// file's content
+type Post struct {
+        Meta PostMeta `json:"meta"`
+        Content string `json:"content"`
+}
+
+// The datasource interface defined by the blog-consumers
+type DataSource interface {
+        Sync() error
+        DataPath() string
+}
+
+// Container type
+type PostStore struct {
+        Source DataSource
+        Posts map[string]*Post
+        Mu sync.RWMutex
+}
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package config
+
+import (
+        "os"
+        "fmt"
+        "github.com/spf13/viper"
+)
+
+func Load(path string) <span class="cov8" title="1">{
+        configFile, ok := os.LookupEnv("MODE"); if !ok </span><span class="cov0" title="0">{
+                configFile = "config"
+        }</span>
+
+        <span class="cov8" title="1">viper.SetConfigName(configFile)
+        viper.AddConfigPath(path)
+        viper.SetConfigType("toml")
+
+        err := viper.ReadInConfig()
+        if err != nil </span><span class="cov0" title="0">{
+                panic(fmt.Sprintf("Error loading config: %v", err))</span>
+        }
+        
+        // Integrate environment variables into the viper system
+        // NOTE: Gin's default router takes the port by enviornment only
+        <span class="cov8" title="1">viper.SetDefault("service.port", 8080)
+        viper.SetDefault("service.ignore_files", []string{})
+        viper.BindEnv("service.api_key", "APP_API_KEY")
+        os.Setenv("PORT", viper.GetString("service.port"))</span>
+}
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package main
+
+import (
+        "flag"
+
+        "glog/config"
+        "glog/api"
+        "glog/blog"
+        "glog/mdw"
+        "glog/sources"
+
+        "github.com/gin-gonic/gin"
+        "github.com/spf13/viper"
+)
+
+func main() <span class="cov0" title="0">{
+        configDir := flag.String("configDir", "./etc/", "The configuration directory to look in")
+        flag.Parse()
+        config.Load(*configDir)
+
+        ds :=  sources.NewGitDataSource(
+                viper.GetString("service.data_dir"), viper.GetString("repository.url"), viper.GetString("repository.branch"),
+        )
+        ds.Sync()
+
+        blog_store := blog.NewPostStore(ds)
+        blog_store.ReloadLoad()
+
+        router := gin.Default()
+        router.SetTrustedProxies(nil)
+        router.Use(mdw.CorsMdw())
+        api.RegisterRoutes(router, blog_store)
+
+        router.Run()
+}</span>
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package mdw
+
+import (
+        "crypto/subtle"
+        "crypto/sha256"
+        "github.com/gin-gonic/gin"
+        "github.com/spf13/viper"
+        "net/http"
+)
+
+func AuthMdw() gin.HandlerFunc <span class="cov8" title="1">{
+        // Hashing the input and test makes sure subtle.ConstantTimeCompare actually
+        // is constant. It returns instantly when parameters are of different lengths
+        error_message := gin.H{"message": "auth error"}
+        error_code := http.StatusUnauthorized
+        verify := viper.GetString("service.api_key")
+        verifyHash := sha256.Sum256([]byte(verify))
+
+        return func(c *gin.Context) </span><span class="cov8" title="1">{
+                tokenHash := sha256.Sum256([]byte(c.GetHeader("X-Auth-Token")))
+
+                if subtle.ConstantTimeCompare(tokenHash[:], verifyHash[:]) == 0 </span><span class="cov8" title="1">{
+                        c.AbortWithStatusJSON(error_code, error_message)
+                        return
+                }</span>
+
+                <span class="cov8" title="1">c.Next()</span>
+        }
+}
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package mdw
+
+import (
+        "github.com/gin-gonic/gin"
+        "github.com/spf13/viper"
+)
+
+func CorsMdw() gin.HandlerFunc <span class="cov8" title="1">{
+        viper.SetDefault("headers.allow_origin", "http://localhost")
+        allowedOrigin := viper.GetString("headers.allow_origin")
+
+        // IIGC; this function is called on every request
+        // therefore it makes sense to do config stuff before and not directly inside
+        // TODO:
+        // I think the common practice is to have a regex of allowed origins
+        // If the regex matches, return the Origin, not the regex.
+        return func(c *gin.Context) </span><span class="cov8" title="1">{
+                c.Writer.Header().Set(
+                        "Access-Control-Allow-Origin", allowedOrigin,
+                )
+                c.Writer.Header().Set(
+                        "Access-Control-Allow-Methods", "GET",
+                )
+
+                c.Next()
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package mdw
+
+import (
+        "github.com/gin-gonic/gin"
+)
+
+func InjectMdw() gin.HandlerFunc<span class="cov8" title="1">{
+        return func(c *gin.Context)</span><span class="cov8" title="1">{
+                c.Writer.Header().Set(
+                        "X-Dummy", "Nothing",
+                )
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">package sources
+
+import (
+        "fmt"
+        "log"
+        "errors"
+        "github.com/go-git/go-git/v5"
+        "github.com/go-git/go-git/v5/plumbing"
+)
+
+type GitSource struct {
+        // Target directory to place the git repository in
+        Target string
+        // The URL to fetch the repository from
+        Url string
+        // The branch name to checkout
+        Branch string
+        // The actual git repository
+        Repo *git.Repository
+}
+
+func (gds *GitSource) cloneRepository() (*git.Repository, error) <span class="cov8" title="1">{
+        repo, err := git.PlainClone(gds.Target, false, &amp;git.CloneOptions{
+                URL: gds.Url,
+                ReferenceName: plumbing.NewBranchReferenceName(gds.Branch), 
+                SingleBranch: true,
+                Progress: nil,
+        })
+
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return repo, nil</span>
+}
+
+func (gds *GitSource) openRepository() error <span class="cov8" title="1">{
+        repo, err := git.PlainOpen(gds.Target)
+
+        switch </span>{
+                case err == nil:<span class="cov8" title="1">
+                        break</span>
+                case errors.Is(err, git.ErrRepositoryNotExists):<span class="cov8" title="1">
+                        log.Printf("repository does not exists, attempt to clone")
+                        repo, err = gds.cloneRepository()
+                        if err != nil </span><span class="cov8" title="1">{ return err }</span>
+                default:<span class="cov0" title="0">
+                        return fmt.Errorf("existing repository could not be opened: %w", err)</span>
+                }
+
+        <span class="cov8" title="1">gds.Repo = repo
+        return nil</span>
+}
+
+// DataSource Interface method
+func (gds *GitSource) Sync() error <span class="cov8" title="1">{
+        if gds.Repo == nil </span><span class="cov8" title="1">{
+                err := gds.openRepository()
+                if err != nil </span><span class="cov0" title="0">{ return err }</span>
+        }
+
+        <span class="cov8" title="1">wt, err := gds.Repo.Worktree()
+        if err != nil </span><span class="cov0" title="0">{
+                log.Printf("Error getting repository worktree: %s", err.Error())
+        }</span>
+
+        // Pass struct literal cause that's just how it is
+        <span class="cov8" title="1">err = wt.Pull(&amp;git.PullOptions{
+                ReferenceName: plumbing.NewBranchReferenceName(gds.Branch),
+                SingleBranch: true,
+        })
+
+        switch </span>{
+                case err == nil:<span class="cov0" title="0">
+                        return nil</span>
+                case errors.Is(err, git.NoErrAlreadyUpToDate):<span class="cov8" title="1">
+                        return nil</span>
+                default:<span class="cov0" title="0">
+                        return fmt.Errorf("unable to update repository: %w", err)</span>
+        }
+}
+
+// DataSource Interface method
+func (gds *GitSource) DataPath() string <span class="cov8" title="1">{
+        return gds.Target
+}</span>
+
+// Create a new git data source 
+func NewGitDataSource(target, url, branch string) *GitSource <span class="cov8" title="1">{
+        log.Printf("target: %+v - url: %+v - branch: %+v", target, url, branch)
+        return &amp;GitSource{
+                Target: target, Url: url, Branch: branch, Repo: nil,
+        }
+}</span>
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>

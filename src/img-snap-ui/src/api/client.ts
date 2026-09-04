@@ -3,7 +3,7 @@ import type { ImageResponse, ImageCreateRequest } from "../types/image";
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 const getHeaders = () => {
-    const token = localStorage.getItem('snapToken')
+    const token = localStorage.getItem('snapToken') || '';
     return {
         'X-AUTH-TOKEN': token,
         'Content-Type': 'application/json',

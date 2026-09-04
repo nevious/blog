@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, } from 'react';
 import type { ImageResponse } from '../../types/image';
-import { Camera, RefreshCw, Trash2, ExternalLink, Check, ClipboardPlus, View } from 'lucide-react';
+import { Trash2, ExternalLink, Check, ClipboardPlus, View } from 'lucide-react';
 
 interface ImageCardProps {
     image: ImageResponse;

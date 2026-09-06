@@ -1,12 +1,12 @@
 <template>
 	<div class="container">
-		<h1>About</h1>
-		<p>There really isn't much to say :)</p>
-		<p>Perhaps at some point I'll tell you about me, but for now, I have other things to write down.</p>
+		<MarkdownRenderer :content=aboutContent />
 	</div>
 </template>
 
 <script setup>
+	import aboutContent from '@/assets/About.md?raw'
+	import MarkdownRenderer from '@/components/MarkdownRenderer.vue';
 </script>
 
 <style scoped>
@@ -23,4 +23,15 @@
 	margin: 0 auto;
 	flex-grow: 1;
 }
+:deep(.markdown-rendered a) {
+	text-decoration: none;
+	color: var(--ternary-accent-color);
+}
+:deep(.markdown-rendered li) {
+	list-style-type: "🔻 ";
+}
+
+:deep(.markdown-rendered ul li::marker) {
+	 font-family: "Noto Emoji", sans-serif;
+ }
 </style>

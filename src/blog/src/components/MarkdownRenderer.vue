@@ -70,4 +70,9 @@
 	:deep(.markdown-rendered ul li::marker) {
 		 font-family: "Noto Emoji", sans-serif;
 	 }
+
+	:deep(h2, h3) {
+		clear: both;
+		padding-top: 1.5rem;
+	}
 </style>

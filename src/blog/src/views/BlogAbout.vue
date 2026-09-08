@@ -23,15 +23,4 @@
 	margin: 0 auto;
 	flex-grow: 1;
 }
-:deep(.markdown-rendered a) {
-	text-decoration: none;
-	color: var(--ternary-accent-color);
-}
-:deep(.markdown-rendered li) {
-	list-style-type: "🔻 ";
-}
-
-:deep(.markdown-rendered ul li::marker) {
-	 font-family: "Noto Emoji", sans-serif;
- }
 </style>

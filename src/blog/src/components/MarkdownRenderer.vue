@@ -37,42 +37,9 @@
 </script>
 
 <style scoped>
-	.markdown-rendered {
-		font-size: var(--text-base);
-		line-height: 1.75;
-	}
-
 	:deep(blockquote) {
 		background-color: var(--secondary-accent-color-25);
 		padding: 1rem;
 		border-left: 4px solid var(--primary-accent-color);
-	}
-
-	:deep(.markdown-rendered a) {
-		text-decoration: none;
-		color: var(--ternary-accent-color);
-	}
-
-	:deep(.markdown-rendered a:hover) {
-		text-decoration: none;
-		color: var(--ternary-accent-color-50);
-	}
-
-	:deep(.markdown-rendered img) {
-		width: clamp(250px, 100%, 900px);
-		height: auto;
-	}
-
-	:deep(.markdown-rendered li) {
-		list-style-type: "🔻 ";
-	}
-
-	:deep(.markdown-rendered ul li::marker) {
-		 font-family: "Noto Emoji", sans-serif;
-	 }
-
-	:deep(h2, h3) {
-		clear: both;
-		padding-top: 1.5rem;
 	}
 </style>

@@ -87,3 +87,37 @@ li {
 .fallback-block {
 	margin:auto;
 }
+
+/* markdown-rendered */
+.markdown-rendered {
+	font-size: var(--text-base);
+	line-height: 1.75;
+}
+
+.markdown-rendered a {
+	text-decoration: none;
+	color: var(--ternary-accent-color);
+}
+
+.markdown-rendered a:hover {
+	text-decoration: none;
+	color: var(--ternary-accent-color-50);
+}
+
+.markdown-rendered li {
+	list-style-type: "🔻 ";
+}
+
+.markdown-rendered img {
+	width: clamp(400px, 100%, 900px);
+	height: auto;
+}
+
+.markdown-rendered ul li::marker {
+	 font-family: "Noto Emoji", sans-serif;
+ }
+
+h2 {
+	clear: both;
+	padding-top: 1.5rem;
+}

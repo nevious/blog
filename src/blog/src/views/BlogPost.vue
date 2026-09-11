@@ -13,9 +13,9 @@
 		<div class="frontmatter">
 			<span v-if="postStore.currentPost.meta.date"><b>On</b> {{ dateFormatter(postStore.currentPost.meta.date) }}</span>
 			<span v-if="postStore.currentPost.meta.author"><b>by</b> {{ postStore.currentPost.meta.author }}</span>
-			<span v-if="postStore.currentPost.meta.category"><b>in</b></span>
-			<div class="category-span">
-				<span v-for="category in postStore.currentPost.meta.category" class="category-tag">{{category}}</span>
+			<span v-if="postStore.currentPost.meta.tags"><b>in</b></span>
+			<div class="tags-span">
+				<span v-for="tag in postStore.currentPost.meta.tags" class="category-tag">{{tag}}</span>
 			</div>
 		</div>
 
@@ -90,7 +90,7 @@
 		padding-bottom: 0.75rem;
 	}
 
-	.category-span {
+	.tags-span {
 		display: flex;
 		gap: 0.5rem;
 	}

@@ -46,7 +46,7 @@
 	})
 
 	const tagSet = computed(() => {
-		const allTags = postStore.posts.flatMap(post => post.category || [])
+		const allTags = postStore.posts.flatMap(post => post.tags || [])
 		return [...new Set(allTags)]
 	})
 
@@ -56,7 +56,7 @@
 		}
 
 		return postStore.posts.filter(post => {
-			const tags = post.category || []
+			const tags = post.tags || []
 			return tags.some(cat => activeTags.value.includes(cat))
 		})
 	})

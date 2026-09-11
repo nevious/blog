@@ -12,21 +12,21 @@ type PostMeta struct {
 	Date time.Time `yaml:"date" json:"date"`
 	Slug string `yaml:"slug" json:"slug"`
 	Author string `yaml:"author" json:"author"`
-	Category []string `yaml:"category" json:"category"`
+	Tags []string `yaml:"tags" json:"tags"`
 	Description string `yaml:"description" json:"description"`
 	Splash string `yaml:"splash" json:"splash"`
 }
 
 // Normalize a Post's tags to lowercase
 func (m *PostMeta) normalize() {
-	tags := m.Category
+	tags := m.Tags
 	var tags_norm []string
 
 	for _, tag := range tags {
 		tags_norm = append(tags_norm, strings.ToLower(tag))
 	}
 
-	m.Category = tags_norm
+	m.Tags = tags_norm
 }
 
 

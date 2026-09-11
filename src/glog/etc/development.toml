@@ -1,6 +1,6 @@
 [service]
 port = 8080
-data_dir = "./data/"
+data_dir = "/tmp/data"
 ignore_files = [
 	"README.md"
 ]
@@ -13,4 +13,4 @@ hint = "testing/development"
 
 [repository]
 url = "https://github.com/nevious/blog_posts"
-branch = "testing"
+branch = "rename_category_to_tags"

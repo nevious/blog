@@ -38,7 +38,7 @@
 
 <style scoped>
 	:deep(blockquote) {
-		background-color: var(--secondary-accent-color-25);
+		background-color: var(--primary-accent-color-50);
 		padding: 1rem;
 		border-left: 4px solid var(--primary-accent-color);
 	}

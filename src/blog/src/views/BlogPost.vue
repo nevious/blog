@@ -19,13 +19,17 @@
 			</div>
 		</div>
 
-		<MarkdownRenderer :content="postStore.currentPost.content" />
+		<MarkdownRenderer :content="postStore.currentPost.content" @image-click="url => selectedImage = url" />
 		<PostPager />
+
+		<div v-if="selectedImage" class="lightbox-overlay" @click="selectedImage = null">
+			<img :src="selectedImage" class="lightbox-image" />
+		</div>
 	</div>
 </template>
 
 <script setup>
-	import { onMounted, watch, computed } from 'vue'
+	import { onMounted, watch, computed, ref } from 'vue'
 	import { usePostStore } from '@/stores/glogPost'
 	import { useRoute } from 'vue-router'
 	import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
@@ -36,6 +40,8 @@
 	// Get store and route
 	const postStore = usePostStore()
 	const route = useRoute()
+
+	const selectedImage = ref(null)
 
 	// date formatter
 	const dateFormatter = (dateString) => {
@@ -102,26 +108,22 @@
 		font-size: var(--text-sm);
 	}
 
-	:deep(.markdown-rendered a) {
-		text-decoration: none;
-		color: var(--ternary-accent-color);
+	.lightbox-overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(0,0,0,0.7);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		cursor: zoom-out;
+		backdrop-filter: blur(5px);
 	}
 
-	:deep(.markdown-rendered a:hover) {
-		text-decoration: none;
-		color: var(--ternary-accent-color-50);
+	.lightbox-image {
+		max-width: 95vw;
+		max-height: 90vh;
+		object-fit: contain;
+		box-shadow: 0 0 30px rgba(0,0,0,0.5);
 	}
-
-	:deep(.markdown-rendered img) {
-		width: clamp(250px, 100%, 900px);
-		height: auto;
-	}
-
-	:deep(.markdown-rendered li) {
-		list-style-type: "🔻 ";
-	}
-
-	:deep(.markdown-rendered ul li::marker) {
-		 font-family: "Noto Emoji", sans-serif;
-	 }
 </style>

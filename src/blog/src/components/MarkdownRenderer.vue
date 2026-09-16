@@ -4,11 +4,15 @@
 
 <script setup>
 	import { computed, ref, watch, nextTick } from 'vue'
-	import { marked } from 'marked'
+	// NOTE:
+	// import { thing } --> named import
+	// import thing --> default import
+	import  marked from '@/plugins/marked'
 	import hljs from 'highlight.js'
 	import 'highlight.js/styles/atom-one-dark.css'
 
 	const props = defineProps({ content: { type: String, default: '' } })
+	const emit = defineEmits(['image-click'])
 	const container = ref(null)
 	const renderedContent = computed(() => marked.parse(props.content))
 
@@ -32,8 +36,19 @@
 				image.style.filter = 'blur(0)'
 				image.style.opacity = '1'
 			}
+
+			image.onclick = () => {
+				emit('image-click', image.src)
+			}
+
+			// Trigger the reset if the image is already loaded and somehow it was missed
+			if (image.complete) {
+				image.onload()
+			}
 		})
 	}, { immediate: true })
+
+
 </script>
 
 <style scoped>

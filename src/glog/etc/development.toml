@@ -13,4 +13,4 @@ hint = "testing/development"
 
 [repository]
 url = "https://github.com/nevious/blog_posts"
-branch = "rename_category_to_tags"
+branch = "testing"

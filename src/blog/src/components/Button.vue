@@ -16,11 +16,11 @@
 
 <style scoped>
 .title {
-	font-size: var(--button-title-size);
+	font-size: var(--text-sm);
 }
 
 .description {
-	font-size: var(--button-description-size);
+	font-size: var(--text-xsm);
 }
 
 .button {

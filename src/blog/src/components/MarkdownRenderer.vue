@@ -42,4 +42,22 @@
 		padding: 1rem;
 		border-left: 4px solid var(--primary-accent-color);
 	}
+
+	:deep(img){
+		cursor: zoom-in;
+		width: clamp(250px, 100%, 900px);
+		height: auto;
+	}
+
+	:deep(.gallery) {
+		columns: 3 200px;
+		column-gap: 0.125rem;
+	}
+
+	:deep(.gallery img) {
+		width: 100%;
+		height: auto;
+		margin-bottom: 0.125rem;
+		display: block;
+	}
 </style>

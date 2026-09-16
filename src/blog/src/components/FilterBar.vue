@@ -1,5 +1,5 @@
 <script setup>
-	import { ref, inject } from 'vue'
+	import { ref } from 'vue'
 	import { Tags, Eraser } from '@lucide/vue'
 	const filterList = ref(new Set())
 

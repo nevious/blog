@@ -1,6 +1,6 @@
 [service]
 port = 8080
-data_dir = "/tmp/data"
+data_dir = "/src/data"
 ignore_files = [
 	"README.md"
 ]
@@ -12,5 +12,6 @@ allow_origin = "http://localhost:5173"
 hint = "testing/development"
 
 [repository]
+type = "file"
 url = "https://github.com/nevious/blog_posts"
 branch = "testing"

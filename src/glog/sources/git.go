@@ -87,10 +87,3 @@ func (gds *GitSource) Sync() error {
 func (gds *GitSource) DataPath() string {
 	return gds.Target
 }
-
-// Create a new git data source 
-func NewGitDataSource(target, url, branch string) *GitSource {
-	return &GitSource{
-		Target: target, Url: url, Branch: branch, Repo: nil,
-	}
-}

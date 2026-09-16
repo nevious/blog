@@ -1,4 +1,6 @@
 **local/
+src/glog/cover.html
+src/glog/cover.out
 src/glog/data**
 src/glog/tmp**
 src/glog/.config

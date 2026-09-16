@@ -10,6 +10,7 @@ import (
 	"glog/api"
 	"glog/blog"
 	"glog/config"
+	"glog/jobs"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
@@ -26,7 +27,8 @@ func setup() (*gin.Engine, *blog.PostStore, *httptest.ResponseRecorder,) {
 	ds := &MockDataSource{}
 	router := gin.Default()
 	store := blog.NewPostStore(ds)
-	api.RegisterRoutes(router, store)	
+	queue := jobs.NewJobQueue(store)
+	api.RegisterRoutes(router, store, queue)
 
 	recorder := httptest.NewRecorder()
 

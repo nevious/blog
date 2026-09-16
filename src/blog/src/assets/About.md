@@ -3,7 +3,7 @@
 This is a personal digital garden of Chrigu Schläppi from Switzerland. Its main purpose was to build it as a learning project tapping into different software development concepts. 
 
 ## About the author
-<img style="float:left;margin-right:1rem;width:clamp(150px, 25%, 250px)" src="https://snap.nevious.ch/store/c-headshot" />
+<img class="no-zoom" style="float:left;margin-right:1rem;width:clamp(150px, 25%, 250px)" src="https://snap.nevious.ch/store/c-headshot" />
 
 Linux Nanny by trait, interested in programming, technology, people and their stories - fictional or not.
 

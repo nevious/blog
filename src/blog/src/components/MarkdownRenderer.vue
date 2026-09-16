@@ -75,4 +75,8 @@
 		margin-bottom: 0.125rem;
 		display: block;
 	}
+
+	:deep(.no-zoom) {
+		cursor: default;
+	}
 </style>

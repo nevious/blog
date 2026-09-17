@@ -9,5 +9,6 @@ ignore_files = [
 allow_origin = "https://nevi-blog.netlify.app"
 
 [repository]
+type = "git"
 url = "https://github.com/nevious/blog_posts"
 branch = "main"

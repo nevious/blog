@@ -32,13 +32,15 @@
 			image.style.transition = 'filter 0.3s ease, opacity 0.3s ease'
 			image.loading = 'lazy'
 
+			if (image.alt && !image.title) image.title = image.alt;
+
 			image.onload = () => {
 				image.style.filter = 'blur(0)'
 				image.style.opacity = '1'
 			}
 
 			image.onclick = () => {
-				emit('image-click', image.src)
+				emit('image-click', image)
 			}
 
 			// Trigger the reset if the image is already loaded and somehow it was missed

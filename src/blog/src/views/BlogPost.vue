@@ -19,17 +19,23 @@
 			</div>
 		</div>
 
-		<MarkdownRenderer :content="postStore.currentPost.content" @image-click="url => selectedImage = url" />
+		<MarkdownRenderer :content="postStore.currentPost.content" @image-click="image => selectedImage = image" />
 		<PostPager />
 
 		<div v-if="selectedImage" class="lightbox-overlay" @click="selectedImage = null">
-			<img :src="selectedImage" class="lightbox-image" />
+			<div class="lightbox-content">
+				<img :src="selectedImage.src" class="lightbox-image" />
+				<p v-if="selectedImage.title ? selectedImage.title : selectedImage.alt"
+					class="lightbox-caption">
+						{{selectedImage.title}}
+				</p>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-	import { onMounted, watch, computed, ref } from 'vue'
+	import { onMounted, watch, ref } from 'vue'
 	import { usePostStore } from '@/stores/glogPost'
 	import { useRoute } from 'vue-router'
 	import MarkdownRenderer from '@/components/MarkdownRenderer.vue'
@@ -120,9 +126,23 @@
 		backdrop-filter: blur(5px);
 	}
 
+	.lightbox-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 95vw;
+	}
+
+	.lightbox-caption {
+		color: white;
+		margin-top: 1rem;
+		font-size: var(--text-lg);
+		text-align: center;
+	}
+
 	.lightbox-image {
 		max-width: 95vw;
-		max-height: 90vh;
+		max-height: 85vh;
 		object-fit: contain;
 		box-shadow: 0 0 30px rgba(0,0,0,0.5);
 	}

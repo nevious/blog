@@ -15,7 +15,7 @@ parameters:
     - "Hi %s"
     - "Lookg at me, I'm %s"
   app.image_cache_dir: '%kernel.project_dir%/var/images/%kernel.environment%/'
-  app.cache_life_time: 86400
+  app.cache_life_time: 31536000  # 1 Year
 
 services:
     # default configuration for services in *this* file

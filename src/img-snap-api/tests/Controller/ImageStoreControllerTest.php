@@ -58,5 +58,12 @@ final class ImageStoreControllerTest extends WebTestCase
         $response = $this->client->getResponse();
         self::assertResponseIsSuccessful();
         $this->assertSame($response->headers->get('Content-Type'), 'image/webp');
+        $this->assertNotNull($response->headers->get("Cache-Control"));
+        $this->assertNotNull($response->headers->get("ETag"));
+
+        $this->assertStringContainsString("immutable", $response->headers->get("Cache-Control"));
+        $this->assertStringContainsString("max-age", $response->headers->get("Cache-Control"));
+        $this->assertStringContainsString("s-maxage", $response->headers->get("Cache-Control"));
+        $this->assertStringContainsString("public", $response->headers->get("Cache-Control"));
     }
 }

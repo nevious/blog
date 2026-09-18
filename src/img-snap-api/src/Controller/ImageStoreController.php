@@ -25,6 +25,13 @@ final class ImageStoreController extends AbstractController
             $response = new BinaryFileResponse($path);
             $response->headers->set('Content-Type', 'image/webp');
 
+            $response->setAutoEtag();
+            $response->setCache([
+                'max_age'   => $this->imageProxy->getCacheTTL(),
+                's_maxage'  => $this->imageProxy->getCacheTTL(),
+                'immutable' => true,
+            ]);
+
             return $response;
         } catch (Exception\ImageNotFoundException) {
             return $this->json([

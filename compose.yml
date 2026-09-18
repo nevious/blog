@@ -32,6 +32,9 @@ services:
     volumes:
       - ./src/img-snap-api:/app/
     tty: true
+    environment:
+      TRUSTED_HOSTS: "localhost"
+      TRUSTED_PROXIES: "localhost"
   img-snap-ui:
     env_file: "./src/img-snap-ui/.env"
     image: img-snap-ui

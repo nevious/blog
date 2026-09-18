@@ -36,7 +36,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install gd
 
 RUN cat << EOF > /usr/local/etc/php/conf.d/custom_memory_limit.ini
-memory_limit = 256M;
+memory_limit = 512M;
 EOF
 
 ENTRYPOINT ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]

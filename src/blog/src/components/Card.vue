@@ -1,8 +1,11 @@
 <template>
 	<div class="card-inner">
 		<div class="card-image">
-			<img v-if="background" :src="background" alt="" />
-			<div v-else class="card-image-fallback" />
+			<img v-if="background"
+				:src="background"
+				:class="{'loaded' : isLoaded}"
+				@load="isLoaded = true"
+				alt="Splash" />
 		</div>
 
 		<div class="description">
@@ -13,9 +16,10 @@
 </template>
 
 <script setup>
+	import { ref } from 'vue'
+	const isLoaded = ref(false)
 	const props = defineProps({
 		background: { type: String },
-		featured: { type: Boolean, default: false }
 	})
 </script>
 
@@ -28,18 +32,6 @@
 
 	.card-image {
 		overflow: hidden;
-	}
-
-	.card-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		display: block;
-	}
-
-	.card-image-fallback {
-		width: 100%;
-		height: 100%;
 		background: linear-gradient(135deg,
 			var(--primary-accent-color) 0% 33%,
 			var(--secondary-accent-color) 33%,
@@ -47,8 +39,19 @@
 		);
 	}
 
-	.card-inner.featured .card-image {
-		clip-path: none;
+	.card-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		opacity: 0;
+		filter: blur(10px);
+		transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+	}
+
+	.card-image img.loaded {
+		opacity: 1;
+		filter: blur(0);
 	}
 
 	.description {

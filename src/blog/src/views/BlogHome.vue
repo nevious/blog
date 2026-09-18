@@ -81,18 +81,17 @@
 	}
 
 	.blog-item {
-		flex: 1 1 calc(33.333% - 2rem);
-		flex-wrap: wrap;
 		box-sizing: border-box;
 		box-shadow: 0 0 0 0px var(--primary-accent-color);
-		max-height: 250px;
 		transition: transform 0.2s;
 		overflow: hidden;
 	}
 
 	.blog-item:not(.feature) {
-		flex: 1 1 calc((100% - 2rem*2)/3);
-		min-width: clamp(200px, calc((100% - 2rem*2)/3), 500px);
+		max-width: 66%;
+		max-height: 250px;
+		flex: 1 1 calc((100% - 1.5rem*2)/3);
+		min-width: clamp(200px, calc((100% - 1.5rem*2)/3), 500px);
 	}
 
 	.blog-item:hover {

@@ -3,7 +3,6 @@
 		<div class="card-image">
 			<img v-if="background"
 				:src="background"
-				:class="{'loaded' : isLoaded}"
 				@load="isLoaded = true"
 				alt="Splash" />
 		</div>
@@ -44,14 +43,6 @@
 		height: 100%;
 		object-fit: cover;
 		display: block;
-		opacity: 0;
-		filter: blur(10px);
-		transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
-	}
-
-	.card-image img.loaded {
-		opacity: 1;
-		filter: blur(0);
 	}
 
 	.description {

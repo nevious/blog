@@ -88,7 +88,10 @@
 	}
 
 	.blog-item:not(.feature) {
-		max-width: 66%;
+		/*
+		 * Needs the pixel value for max-width, otherwise the limit is applied on mobile too
+		 */
+		max-width: 660px;
 		max-height: 250px;
 		flex: 1 1 calc((100% - 1.5rem*2)/3);
 		min-width: clamp(200px, calc((100% - 1.5rem*2)/3), 500px);

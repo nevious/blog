@@ -2,7 +2,7 @@
 	<div class="pageNav">
 		<div class="logo">
 			<div class="logo-svg">
-				<img :src="siteStore.logo" :alt="siteStore.description" />
+				<img :src="siteStore.logo" alt="logo" />
 			</div>
 			<h1>{{ siteStore.siteTitle }}</h1>
 		</div>

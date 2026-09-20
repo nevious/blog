@@ -16,7 +16,7 @@
 			:key="post.slug"
 			:to="`/posts/${post.slug}`">
 
-			<Card :background="post.splash ? post.splash : undefined" >
+			<Card :background="post.splash ? post.splash : undefined" :feature="index === 0">
 				<template #card-header>
 					<h3 class="card-title">{{ post.title }}</h3>
 				</template>

@@ -3,6 +3,7 @@
 		<div class="card-image">
 			<img v-if="background"
 				:src="background"
+				:fetchpriority="feature ? 'high' : 'auto'"
 				@load="isLoaded = true"
 				alt="Splash" />
 		</div>
@@ -17,8 +18,10 @@
 <script setup>
 	import { ref } from 'vue'
 	const isLoaded = ref(false)
+
 	const props = defineProps({
 		background: { type: String },
+		feature: { type: Boolean, default: false},
 	})
 </script>
 

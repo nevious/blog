@@ -4,6 +4,7 @@
 			<img v-if="background"
 				:src="background"
 				:fetchpriority="feature ? 'high' : 'auto'"
+				:loading="feature ? 'eager' : 'lazy'"
 				@load="isLoaded = true"
 				alt="Splash" />
 		</div>

@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# Host
+Sitemap: https://nevi-blog.netlify.app/sitemap.xml
 Host: https://nevi-blog.netlify.app

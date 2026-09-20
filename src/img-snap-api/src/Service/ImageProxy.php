@@ -51,11 +51,14 @@ class ImageProxy {
      */
     public function convertStoreImage(string $data, string $slug): void {
         $gdImage = imagecreatefromstring($data);
+        if (imagesx($gdImage) > 3400){
+            $gdImage = imagescale($gdImage, 3400);
+        }
 
         // Output needs to be buffered and read because this is how
         // imagewebp() works.
         ob_start();
-        \imagewebp($gdImage, null, 100);
+        \imagewebp($gdImage, null, 85);
         $webp = ob_get_clean();
 
         $this->filesystem->dumpFile($this->getImagePath($slug), $webp);
